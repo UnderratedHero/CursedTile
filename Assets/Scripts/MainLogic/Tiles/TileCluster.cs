@@ -7,6 +7,8 @@ public class TileCluster : MonoBehaviour
     [SerializeField] private TileClusterConfig _config;
     private List<Tile> _tiles;
 
+    public List<Tile> Tiles {  get { return _tiles; } }
+
     private void Awake()
     {
         _tiles = new List<Tile>();

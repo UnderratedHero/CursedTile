@@ -6,5 +6,7 @@ public class TileClusterConfig : ScriptableObject
 {
     [SerializeField] private List<TileType> _tileType;
     [SerializeField] private List<DifficultyLevel> _difficultyLevel;
-    [SerializeField] private bool _isGuaranteeFill;       
+    
+    public List<TileType> TileType { get { return _tileType; } }
+    public List<DifficultyLevel> DifficultyLevel { get { return _difficultyLevel; } }
 }
