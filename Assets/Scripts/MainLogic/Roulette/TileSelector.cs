@@ -4,10 +4,11 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private string _targetLayerName;
-
+    [SerializeField] private EventHandler _eventHandler;
+    
     private int _targetLayer;
-    private List<Tile> _tiles; 
-
+    private List<TileInfo> _tiles; 
+    
     private void Awake()
     {
         _targetLayer = LayerMask.NameToLayer(_targetLayerName);
@@ -23,5 +24,7 @@ public class TileSelector : MonoBehaviour
             return;
 
         _tiles = tileCluster.Tiles;
+        TileDataManager.Initialize(_tiles);
+        _eventHandler?.TriggerAction();
     }
 }

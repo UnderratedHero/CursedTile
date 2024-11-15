@@ -1,20 +1,22 @@
 using System.Linq;
 using UnityEngine;
 
-public class Tile
+public class TileInfo
 {
     private TileType _type;
     private DifficultyLevel _difficulty;
     private bool _isGuaranteeFill;
-    
-    private const float FillConstant = 0.5f;
+    private Sprite _sprite;
 
+    private const float FillConstant = 0.5f;
+    
+    public Sprite Sprite {  get { return _sprite; } }
     public TileType Type {  get { return _type; } } 
     public DifficultyLevel DifficultyLevel { get { return _difficulty; } }
     public bool IsGuaranteeFill { get {  return _isGuaranteeFill; } }
 
 
-    public Tile(TileClusterConfig config)
+    public TileInfo(TileClusterConfig config)
     {
         RandomInitialize(config);
     }
@@ -24,6 +26,7 @@ public class Tile
         GetRandomTileType(config);
         GetRandomDifficultyLevel(config);
         GetRandomFill();
+        _sprite = config.Sprites.FirstOrDefault(v => v.tileType == _type).sprite;
     }
 
     private void GetRandomTileType(TileClusterConfig config)

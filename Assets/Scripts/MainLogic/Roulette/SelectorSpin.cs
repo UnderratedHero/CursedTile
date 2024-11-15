@@ -5,7 +5,7 @@ public class SelectorSpin : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private float _slowingLimit = 100f;
     [SerializeField] private float returnSpeed = 5f;
-    private Vector3 _fixedPosition; 
+    private Vector3 _fixedPosition;
 
     private void Awake()
     {

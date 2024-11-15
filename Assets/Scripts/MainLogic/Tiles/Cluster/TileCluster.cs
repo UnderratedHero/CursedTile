@@ -5,14 +5,14 @@ public class TileCluster : MonoBehaviour
 {
     [SerializeField] private int _tilesAmount = 8;
     [SerializeField] private TileClusterConfig _config;
-    private List<Tile> _tiles;
+    private List<TileInfo> _tiles;
 
-    public List<Tile> Tiles {  get { return _tiles; } }
+    public List<TileInfo> Tiles {  get { return _tiles; } }
 
     private void Awake()
     {
-        _tiles = new List<Tile>();
+        _tiles = new List<TileInfo>();
         for (var i = 0; i < _tilesAmount; i++)
-            _tiles.Add(new Tile(_config));
+            _tiles.Add(new TileInfo(_config));
     }
 }
