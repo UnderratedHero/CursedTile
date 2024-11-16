@@ -44,13 +44,13 @@ public class SceneTransition : MonoBehaviour
 
     private void Update()
     {
-        if (loadingSceneOperation != null)
-        {
-            LoadingPercentage.text = Mathf.RoundToInt(loadingSceneOperation.progress * 100) + "%";
+        if (loadingSceneOperation == null)
+            return;
 
-            LoadingProgressBar.fillAmount = Mathf.Lerp(LoadingProgressBar.fillAmount, loadingSceneOperation.progress,
-                Time.deltaTime * 5);
-        }
+        LoadingPercentage.text = Mathf.RoundToInt(loadingSceneOperation.progress * 100) + "%";
+
+        LoadingProgressBar.fillAmount = Mathf.Lerp(LoadingProgressBar.fillAmount, loadingSceneOperation.progress,
+            Time.deltaTime * 5);
     }
 
     public void OnAnimationOver()
