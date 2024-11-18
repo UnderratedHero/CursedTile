@@ -9,7 +9,7 @@ public class TileClusterPlacer : MonoBehaviour
     [SerializeField] private Vector3 _leftEnd;
     [SerializeField] private Vector3 _rightEnd;
 
-    private List<TileInfo> _tiles;
+    private List<TileInfoRandom> _tiles;
     private List<Vector3> _tilePositions;
 
     private void Start()
@@ -45,7 +45,7 @@ public class TileClusterPlacer : MonoBehaviour
             var tileInstance = Instantiate(_tilePrefab, position, Quaternion.identity, transform);
 
             var data = tileInstance.GetComponent<TileData>();
-            data.SetInformation(tile);
+            data.SetInformation(i, tile);
         }
     }
 }

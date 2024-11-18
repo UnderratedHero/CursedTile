@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TileDataManager : MonoBehaviour
 {
-    private static List<TileInfo> _tiles;
+    private static List<TileInfoRandom> _tiles;
     
-    public static List<TileInfo> Tiles {  get { return _tiles; } }
+    public static List<TileInfoRandom> Tiles {  get { return _tiles; } }
     public static TileDataManager Instance { get; private set; }
 
     private void Awake()
@@ -22,7 +22,7 @@ public class TileDataManager : MonoBehaviour
         }
     }
 
-    public static void Initialize(IEnumerable<TileInfo> tiles)
+    public static void Initialize(IEnumerable<TileInfoRandom> tiles)
     {
         if (Instance == null)
         {
@@ -34,8 +34,14 @@ public class TileDataManager : MonoBehaviour
         _tiles = tiles.ToList();
     }
 
-    public void UpdateData(IEnumerable<TileInfo> tiles)
+    public static void UpdateData(IEnumerable<TileInfoRandom> tiles)
     {
         _tiles = tiles.ToList();
+    }
+
+    public static void SelfDestroy()
+    {
+        Destroy(Instance.gameObject);
+        Instance = null;
     }
 }

@@ -7,7 +7,7 @@ public class TileSelector : MonoBehaviour
     [SerializeField] private EventHandler _eventHandler;
     
     private int _targetLayer;
-    private List<TileInfo> _tiles; 
+    private List<TileInfoRandom> _tiles; 
     
     private void Awake()
     {

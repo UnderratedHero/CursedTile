@@ -422,25 +422,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219951482}
   m_CullTransparentMesh: 1
---- !u!1 &346992608 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4927639884190974721, guid: 32493800d4b9c5745990bdf083dd0356, type: 3}
-  m_PrefabInstance: {fileID: 4927639884264417889}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &346992612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 346992608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42febd6f46d162d4792b2308b657354e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goToScene: TileForming
-  _eventHandler: {fileID: 1542866451}
 --- !u!1001 &416784080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,6 +1252,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 346992612, guid: 32493800d4b9c5745990bdf083dd0356, type: 3}
+      propertyPath: _eventHandler
+      value: 
+      objectReference: {fileID: 1542866451}
     - target: {fileID: 1150943788, guid: 32493800d4b9c5745990bdf083dd0356, type: 3}
       propertyPath: _eventHandler
       value: 
@@ -1323,10 +1308,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927639884190974721, guid: 32493800d4b9c5745990bdf083dd0356, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32493800d4b9c5745990bdf083dd0356, type: 3}
 --- !u!1001 &8128457167161003603
@@ -1336,42 +1317,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8128457167077602867, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457167302204354, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457167307358598, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457167830498078, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168382400008, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168387706601, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168429939507, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168636819808, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168636819808, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: _rotationThreshold
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8128457168636819836, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1419,10 +1364,6 @@ PrefabInstance:
     - target: {fileID: 8128457168636819837, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
       propertyPath: m_Name
       value: Roulette
-      objectReference: {fileID: 0}
-    - target: {fileID: 8128457168650437300, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c55e1a1e39808b4d9334c5021035419, type: 3}

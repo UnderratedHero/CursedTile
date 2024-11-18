@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class TileInfo
+public class TileInfoRandom
 {
     private TileType _type;
     private DifficultyLevel _difficulty;
@@ -16,7 +16,7 @@ public class TileInfo
     public bool IsGuaranteeFill { get {  return _isGuaranteeFill; } }
 
 
-    public TileInfo(TileClusterConfig config)
+    public TileInfoRandom(TileClusterConfig config)
     {
         RandomInitialize(config);
     }
