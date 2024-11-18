@@ -1,32 +1,31 @@
 using Assets.Scripts.Character;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterInputController : MonoBehaviour
 {
-    [SerializeField] public GameObject controlableGameObject;
-    private IControllable controlableCharacter;
+    [SerializeField] private GameObject _controlableGameObject;
+    [SerializeField] private List<InputMapping> inputMappings;
 
-    private GameInput gameInput;
+    private Dictionary<KeyCode, Vector2> keyToDirection;
+    private IControllable _controlableCharacter;
 
-    // Start is called before the first frame update
     void Start()
     {
-        controlableCharacter = controlableGameObject.GetComponent<IControllable>();
+        _controlableCharacter = _controlableGameObject.GetComponent<IControllable>();
 
-        if (controlableCharacter == null)
+        if (_controlableCharacter == null)
             throw new NullReferenceException("IControllable is empty");
+
+        keyToDirection = new Dictionary<KeyCode, Vector2>();
+        foreach (var mapping in inputMappings)
+        {
+            if (!keyToDirection.ContainsKey(mapping.key))
+                keyToDirection.Add(mapping.key, mapping.direction);
+        }
     }
 
-    private void Awake()
-    {
-        gameInput = new GameInput();
-        gameInput.Enable();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ReadMovement();
@@ -34,8 +33,22 @@ public class CharacterInputController : MonoBehaviour
 
     private void ReadMovement()
     {
-        var direction = gameInput.Gameplay.Movement.ReadValue<Vector2>();
+        var direction = Vector2.zero;
 
-        controlableCharacter.Move(direction);
+        foreach (var key in keyToDirection.Keys)
+        {
+            if (Input.GetKey(key))
+            {
+                direction += keyToDirection[key];
+            }
+        }
+        _controlableCharacter.Move(direction.normalized);
     }
+}
+
+[Serializable]
+public class InputMapping
+{
+    public KeyCode key;          
+    public Vector2 direction;   
 }
