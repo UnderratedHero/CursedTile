@@ -1,14 +1,28 @@
 using Assets.Scripts.Character;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IControllable
 {
-    [SerializeField] private GameObject _charachter;
-    [SerializeField] private float _moveSpeed = 10.0f;
+    [SerializeField] public GameObject CharacterObject;
+    [SerializeField] public float MoveSpeed = 10.0f;
 
     public void Move(Vector2 vector)
     {
-        _charachter.transform.position += new Vector3(vector.x, vector.y) * _moveSpeed;
-     
+        CharacterObject.transform.position += new Vector3(vector.x, vector.y) * MoveSpeed;
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
 }
