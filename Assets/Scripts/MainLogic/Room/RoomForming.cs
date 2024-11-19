@@ -17,11 +17,11 @@ public class RoomForming : MonoBehaviour
 
     public void ApplyTiles()
     {
-        var result =new List<TileInfoRandom>();
+        var result = new List<TileInfoRandom>();
 
         foreach (var tile in _tiles)
         {
-            var data = tile.GetComponent<TileData>();
+            var data = tile.GetComponent<Tile>();
             result.Add(data.TileInfo);
         }
 

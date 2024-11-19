@@ -1,32 +1,24 @@
 using Assets.Scripts.Character;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterInputController : MonoBehaviour
 {
-    [SerializeField] public GameObject controlableGameObject;
-    private IControllable controlableCharacter;
+    [SerializeField] private GameObject _controlableGameObject;
+    private IControllable _controlableCharacter;
+    private GameInput _gameInput;
 
-    private GameInput gameInput;
-
-    // Start is called before the first frame update
     void Start()
     {
-        controlableCharacter = controlableGameObject.GetComponent<IControllable>();
+        _controlableCharacter = _controlableGameObject.GetComponent<IControllable>();
 
-        if (controlableCharacter == null)
+        if (_controlableCharacter == null)
             throw new NullReferenceException("IControllable is empty");
+
+        _gameInput = new GameInput();
+        _gameInput.Enable();
     }
 
-    private void Awake()
-    {
-        gameInput = new GameInput();
-        gameInput.Enable();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ReadMovement();
@@ -34,8 +26,8 @@ public class CharacterInputController : MonoBehaviour
 
     private void ReadMovement()
     {
-        var direction = gameInput.Gameplay.Movement.ReadValue<Vector2>();
+        var direction = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
 
-        controlableCharacter.Move(direction);
+        _controlableCharacter.Move(direction.normalized);
     }
 }

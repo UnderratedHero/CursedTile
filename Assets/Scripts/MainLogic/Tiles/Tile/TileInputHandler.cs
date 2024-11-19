@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class TileInputHandler : MonoBehaviour
 {
@@ -41,7 +40,6 @@ public class TileInputHandler : MonoBehaviour
 
         _waitingForSecondClick = false;
         _isPlaced = true;
-        Debug.Log("Placed Tile in cell");
     }
 
     private void OnMouseDown()
@@ -50,7 +48,6 @@ public class TileInputHandler : MonoBehaviour
         {
             _tilePlacer.ReturnTile(_selectedTile, _startTransform);
             _isPlaced = false;
-            Debug.Log("Returned Tile");
             return;
         }
 
@@ -59,7 +56,6 @@ public class TileInputHandler : MonoBehaviour
 
         _selectedTile = gameObject;
         _waitingForSecondClick = true;
-        Debug.Log("Selected tile");
     }
 
     private void HandleTileInteraction(GameObject target)

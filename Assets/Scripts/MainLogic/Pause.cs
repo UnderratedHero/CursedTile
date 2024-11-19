@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
-    private bool isPaused = false;
+    private bool _isPaused = false;
 
     public void TogglePause()
     {
-        isPaused = !isPaused;
+        _isPaused = !_isPaused;
 
-        if (isPaused)
+        if (_isPaused)
             Time.timeScale = 0f;
         else
             Time.timeScale = 1f;

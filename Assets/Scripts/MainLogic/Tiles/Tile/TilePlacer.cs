@@ -7,7 +7,7 @@ public class TilePlacer : MonoBehaviour
 
     public void ReturnTile(GameObject tile, Vector3 position)
     {
-        var tileData = tile.GetComponent<TileData>();
+        var tileData = tile.GetComponent<Tile>();
         if (!_lockedPositions.ContainsKey(tileData.Id))
             return;
 
@@ -17,7 +17,7 @@ public class TilePlacer : MonoBehaviour
 
     public bool SetTilePosition(GameObject tile, Vector3 position)
     {
-        var tileData = tile.GetComponent<TileData>(); 
+        var tileData = tile.GetComponent<Tile>(); 
         if (!_lockedPositions.TryAdd(tileData.Id, position))
             return false;
         

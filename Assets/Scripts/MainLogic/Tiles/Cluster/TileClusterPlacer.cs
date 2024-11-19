@@ -44,7 +44,7 @@ public class TileClusterPlacer : MonoBehaviour
             var position = _tilePositions[i];
             var tileInstance = Instantiate(_tilePrefab, position, Quaternion.identity, transform);
 
-            var data = tileInstance.GetComponent<TileData>();
+            var data = tileInstance.GetComponent<Tile>();
             data.SetInformation(i, tile);
         }
     }

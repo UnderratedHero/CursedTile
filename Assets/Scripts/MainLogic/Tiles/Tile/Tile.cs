@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TileData : MonoBehaviour
+public class Tile : MonoBehaviour
 {
     [SerializeField] private GameObject _sprite;
     private TileInfoRandom _tileInfo;
