@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class TileClusterConfig : ScriptableObject
     public List <TileSpritePair> Sprites { get { return _sprites; } }
 }
 
-[System.Serializable]
+[Serializable]
 public class TileSpritePair
 {
     public TileType tileType;

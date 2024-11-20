@@ -8,6 +8,11 @@ public class CharacterInputController : MonoBehaviour
     private IControllable _controlableCharacter;
     private GameInput _gameInput;
 
+    private bool _isAttacking = false;
+    private float _attackTime = 0.25f;
+    private float _timer = 0f;
+
+
     void Start()
     {
         _controlableCharacter = _controlableGameObject.GetComponent<IControllable>();
@@ -22,6 +27,8 @@ public class CharacterInputController : MonoBehaviour
     void Update()
     {
         ReadMovement();
+        ReadAttack();
+        SwitchWeaponRead();
     }
 
     private void ReadMovement()
@@ -29,5 +36,32 @@ public class CharacterInputController : MonoBehaviour
         var direction = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
 
         _controlableCharacter.Move(direction.normalized);
+    }
+
+    private void ReadAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _isAttacking = true;
+            _controlableCharacter.Attack();
+        }
+
+        if (!_isAttacking)
+            return;
+
+        _timer += Time.deltaTime;
+
+        if (_timer > _attackTime)
+        {
+            _isAttacking = false;
+            _timer = 0f;
+            _controlableCharacter.Unack();
+        }
+    }
+
+    private void SwitchWeaponRead()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            _controlableCharacter.SwitchWeapon();
     }
 }

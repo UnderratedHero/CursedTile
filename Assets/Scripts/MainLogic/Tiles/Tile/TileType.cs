@@ -1,7 +1,7 @@
 public enum TileType
 {
     Enemy,
-    Loot, 
+    Heal, 
     Trap
 }
 

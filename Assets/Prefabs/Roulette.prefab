@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 100
-  _rotatingDelay: 5
+  _rotatingDelay: 2
   _rigidBody: {fileID: 8128457168636819809}
 --- !u!114 &8128457168636819808
 MonoBehaviour:
