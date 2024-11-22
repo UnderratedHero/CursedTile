@@ -21,7 +21,7 @@ public class Character : MonoBehaviour, IControllable
     }
 
     public void SwitchWeapon()
-    {
+    {   
         _currentWeaponConfig = _weaponConfigs.FirstOrDefault(v => v.Id != _currentWeaponConfig.Id);
         _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
     }

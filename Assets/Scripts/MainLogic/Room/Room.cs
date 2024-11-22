@@ -3,16 +3,16 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField] private GameObject _enterPoint;
-    [SerializeField] private EnemySpawner _enemySpawner;
-    [SerializeField] private TrapSpawner _trapSpawner;
-    [SerializeField] private HealSpawner _healSpawner;
+    [SerializeField] private GameObject _spawnerObject;
+    [SerializeField] private GameObject _exitPoint;
+    private ISpawner _spawner;
 
     private int _id;
     private TileInfoRandom _data;
 
     public int Id { get { return _id; } }
-    public TileInfoRandom Data { get { return _data; } }
     public GameObject EnterPoint {  get { return _enterPoint; } }
+    public GameObject ExitPoint { get { return _exitPoint; } }
 
     public void SetInformation(int id, TileInfoRandom info)
     {
@@ -21,15 +21,25 @@ public class Room : MonoBehaviour
         switch (info.Type)
         {
             case TileType.Enemy:
-                _enemySpawner.Spawn();
+                _spawner = _spawnerObject.GetComponent<EnemySpawner>();
                 break;
             case TileType.Trap:
-                _trapSpawner.Spawn();
+                _spawner = _spawnerObject.GetComponent<TrapSpawner>();
                 break;
             case TileType.Heal:
-                _healSpawner.Spawn();
+                _spawner = _spawnerObject.GetComponent<HealSpawner>();
+                _exitPoint.SetActive(true);
                 break;
         }
 
+        _spawner.Spawn();
+        
+        if (_id != 0)
+            _spawner.UnActive();
+    }
+
+    public void SetActiveSpawner()
+    {
+        _spawner.SetActive();
     }
 }

@@ -61,6 +61,9 @@ public class CharacterInputController : MonoBehaviour
 
     private void SwitchWeaponRead()
     {
+        if (_isAttacking)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Q))
             _controlableCharacter.SwitchWeapon();
     }

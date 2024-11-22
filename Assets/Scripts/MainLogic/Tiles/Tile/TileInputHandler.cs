@@ -47,6 +47,7 @@ public class TileInputHandler : MonoBehaviour
         if (_isPlaced)
         {
             _tilePlacer.ReturnTile(_selectedTile, _startTransform);
+            _roomForming.RemoveTile(_selectedTile);
             _isPlaced = false;
             return;
         }

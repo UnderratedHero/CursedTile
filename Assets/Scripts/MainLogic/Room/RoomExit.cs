@@ -4,6 +4,7 @@ using UnityEngine;
 public class RoomExit : MonoBehaviour
 {
     [SerializeField] private Room _currentRoom;
+    [SerializeField] private string _layerName;
 
     private EventHandler _onFinalStep;
     private bool _isFinalStep = false;
@@ -26,15 +27,16 @@ public class RoomExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.layer != LayerMask.NameToLayer(_layerName) || other == null)
+            return;
+
         if (_isFinalStep)
         {
             _onFinalStep?.TriggerAction();
             return;
         }    
 
-        if (other == null)
-            return;
-
         other.transform.position = _nextRoom.EnterPoint.transform.position;
+        _nextRoom.SetActiveSpawner();
     }
 }

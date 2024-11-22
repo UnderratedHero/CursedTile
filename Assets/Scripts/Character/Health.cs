@@ -1,30 +1,37 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private const float HealthMax = 15f;
-    private float _health = 15f;
+    [SerializeField] private float _healthMax = 15f;
+    public event Action OnEntityDead;
+    private float _health;
+
+    public float EntityHealth { get { return _health; } }
+    public float EntityMaxHealth { get { return _healthMax; } }
+
+    private void Awake()
+    {
+        _health = _healthMax;
+    }
 
     public void Damage(float damage)
     {
-        Debug.Log("Get damage" + damage);
         _health -= damage;
         if (_health <= 0)
-        {
-            Debug.Log("Im dead");
             Death();
-        }
     }
 
     public void Heal(float heal)
     {
         _health += heal;
-        if (_health > HealthMax)
-            _health = HealthMax;
+        if (_health > _healthMax)
+            _health = _healthMax;
     }
 
     public void Death()
     {
+        OnEntityDead?.Invoke();
         Destroy(gameObject);
     }
 }

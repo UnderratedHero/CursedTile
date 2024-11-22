@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8236492741340159109}
   - component: {fileID: 775638403640872748}
   - component: {fileID: 7221232966916598723}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 6571716612413886702}
   - component: {fileID: 4226044107077471721}
   - component: {fileID: 4953980222901602023}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5013199779128233173}
   - component: {fileID: 624057919159042453}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c258877f4b36f45428bf793879db20d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4424955006109146323}
   - component: {fileID: 7784644221459107090}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc218032302a53144876e7a9238d378f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthMax: 30
 --- !u!58 &6025725395549733434
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7382508773220220733}
   - component: {fileID: 1295581801596054206}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}

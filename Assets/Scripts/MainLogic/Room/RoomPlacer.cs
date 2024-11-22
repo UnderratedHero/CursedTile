@@ -18,7 +18,7 @@ public class RoomPlacer : MonoBehaviour
     private void Start()
     {
         GeneratePositions();
-        SpawnTiles();
+        SpawnRooms();
     }
 
     private void GeneratePositions()
@@ -37,7 +37,7 @@ public class RoomPlacer : MonoBehaviour
         }
     }
 
-    private void SpawnTiles()
+    private void SpawnRooms()
     {
         if (!_tilesInfo.Any() || !_roomPositions.Any())
             return;

@@ -12,6 +12,14 @@ public class SelectorSpin : MonoBehaviour
         _fixedPosition = transform.position;
     }
 
+    private void Start()
+    {
+        if (TileDataManager.Instance == null)
+            return;
+
+        TileDataManager.SelfDestroy();
+    }
+
     private void Update()
     {
         transform.position = _fixedPosition;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class UiInputManage : MonoBehaviour
 {
     [SerializeField] private List<KeyCanvasPair> _openKeyNames;
+    [SerializeField] private EventHandler _handler;
+
     private void Update()
     {
         foreach (var key in _openKeyNames)
@@ -14,11 +16,14 @@ public class UiInputManage : MonoBehaviour
                 continue;
 
             key.Canvas.SetActive(!key.Canvas.activeInHierarchy);
+
+            if (key.KeyName == "Escape")
+                _handler.TriggerAction();
         }
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class KeyCanvasPair
 {
     [SerializeField] private string _keyName;
