@@ -30,6 +30,8 @@ public class Room : MonoBehaviour
                 _spawner = _spawnerObject.GetComponent<HealSpawner>();
                 _exitPoint.SetActive(true);
                 break;
+            default:
+                return;
         }
 
         _spawner.Spawn();

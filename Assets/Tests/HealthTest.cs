@@ -1,19 +1,16 @@
 using System;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class HealthTest : MonoBehaviour
 {
     [SerializeField] private float _healthMax = 15f;
-    [SerializeField] private ParticleSystem _particles;
-    [SerializeField] private AudioSource _deathSource;
-    [SerializeField] private AudioSource _damageSource;
     public event Action OnEntityDead;
     private float _health;
 
     public float EntityHealth { get { return _health; } }
     public float EntityMaxHealth { get { return _healthMax; } }
 
-    private void Awake()
+    public void Awake()
     {
         _health = _healthMax;
     }
@@ -21,13 +18,8 @@ public class Health : MonoBehaviour
     public void Damage(float damage)
     {
         _health -= damage;
-        _particles.Play();
-        _damageSource.Play();
         if (_health <= 0)
-        {
-            _deathSource.Play();
             Death();
-        }
     }
 
     public void Heal(float heal)
