@@ -4,7 +4,14 @@ using UnityEngine.UI;
 public class HealthUI : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
-    [SerializeField] private Health _health;
+    
+    private Health _health;
+
+    private void Start()
+    {
+        var character = FindObjectOfType<Character>();
+        _health = character.GetComponent<Health>();
+    }
 
     private void Update()
     {

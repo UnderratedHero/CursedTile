@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomPrefab: {fileID: 3180455417846485340, guid: 7d63e014a196beb4981f02b0df7b7efa, type: 3}
+  _character: {fileID: 0}
   _roomPositionStep: 15
   _leftEnd: {x: 0, y: 0, z: 0}
-  _rightEnd: {x: 90, y: 0, z: 0}
+  _rightEnd: {x: 300, y: 0, z: 0}
 --- !u!114 &8626891549568779173
 MonoBehaviour:
   m_ObjectHideFlags: 0

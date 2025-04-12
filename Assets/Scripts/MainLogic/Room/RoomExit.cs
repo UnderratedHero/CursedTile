@@ -10,6 +10,11 @@ public class RoomExit : MonoBehaviour
     private bool _isFinalStep = false;
     private Room _nextRoom;
 
+    public void SetRoom(Room room) 
+    {
+        _currentRoom = room;
+    }
+
     private void Start()
     {
         if (!transform.root.TryGetComponent<RoomPlacer>(out var placer) ||
@@ -34,9 +39,18 @@ public class RoomExit : MonoBehaviour
         {
             _onFinalStep?.TriggerAction();
             return;
-        }    
+        }
 
-        other.transform.position = _nextRoom.EnterPoint.transform.position;
-        _nextRoom.SetActiveSpawner();
+        Transform enterTransform = null;
+        foreach (Transform child in _nextRoom.transform.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name.Contains("Enter"))
+            {
+                enterTransform = child;
+                break;
+            }
+        }
+
+        other.transform.position = enterTransform.position;
     }
 }

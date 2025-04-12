@@ -15,13 +15,20 @@ public class CharacterInputController : MonoBehaviour
 
     void Start()
     {
-        _controlableCharacter = _controlableGameObject.GetComponent<IControllable>();
+        try
+        {
+            _controlableCharacter = _controlableGameObject.GetComponent<IControllable>();
 
-        if (_controlableCharacter == null)
-            throw new NullReferenceException("IControllable is empty");
+            if (_controlableCharacter == null)
+                throw new NullReferenceException("IControllable is empty");
 
-        _gameInput = new GameInput();
-        _gameInput.Enable();
+            _gameInput = new GameInput();
+            _gameInput.Enable();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine(ex.Message);
+        }
     }
 
     void Update()

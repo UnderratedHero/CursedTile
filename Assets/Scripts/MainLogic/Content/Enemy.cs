@@ -6,25 +6,27 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Health _health;
 
-    private GameObject _exit;
     private Transform _target;
 
     private void OnEnable()
     {
-        _health.OnEntityDead += SetActive;
+        _health.OnEntityDead += DropLoot;
     }
 
     void Start()
     {
-        var targetObject = GameObject.Find(_targetName);
+        var root = transform.parent.parent;
 
-        if (targetObject == null)
+        foreach (var child in root.transform.GetComponentsInChildren<Transform>(true))
+        {
+            if (!child.name.Contains(_targetName))
+                continue;
+
+            _target = child;
+        }
+
+        if (_target == null)
             return;
-
-        _target = targetObject.transform;
-        var parentTransform = transform.parent.parent;
-        var room = parentTransform.GetComponent<Room>();
-        _exit = room.ExitPoint;
     }
 
     void Update()
@@ -38,11 +40,11 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        _health.OnEntityDead -= SetActive;
+        _health.OnEntityDead -= DropLoot;
     }
 
-    private void SetActive()
+    private void DropLoot()
     {
-        _exit.SetActive(true);
+
     }
 }
