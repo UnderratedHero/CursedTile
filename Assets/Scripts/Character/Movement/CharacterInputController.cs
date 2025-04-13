@@ -36,6 +36,7 @@ public class CharacterInputController : MonoBehaviour
         ReadMovement();
         ReadAttack();
         SwitchWeaponRead();
+        DashRead();
     }
 
     private void ReadMovement()
@@ -73,5 +74,12 @@ public class CharacterInputController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
             _controlableCharacter.SwitchWeapon();
+    }
+
+    private void DashRead()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !_controlableCharacter.IsDashing &&
+            Time.time - _controlableCharacter.LastDashTime > _controlableCharacter.DashCooldown)
+            _controlableCharacter.Dash();
     }
 }

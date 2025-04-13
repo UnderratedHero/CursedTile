@@ -11,7 +11,18 @@ public class Character : MonoBehaviour, IControllable
     [SerializeField] private MeleeAttack _attackArea;
     [SerializeField] private RangeAttack _rangeAttack;
     [SerializeField] private List<WeaponConfig> _weaponConfigs;
+    [SerializeField] private float _dashForce = 10f;
+    [SerializeField] private float _dashCooldown = 1f;
+    [SerializeField] private Rigidbody2D _rb;
+
     private WeaponConfig _currentWeaponConfig;
+    private bool _isDashing = false; 
+    private float _lastDashTime = 0f; 
+
+    public float LastDashTime { get { return _lastDashTime; } }
+    public bool IsDashing { get { return _isDashing; } }
+    public float DashCooldown {  get { return _dashCooldown; } }
+
 
     private void Start()
     {
@@ -61,5 +72,43 @@ public class Character : MonoBehaviour, IControllable
             case WeaponType.Magic:
                 break;
         }
+    }
+
+    public void Dash()
+    {
+        if (_rb == null) return;
+
+        var dashDirection = GetMovementDirection();
+
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = GetFacingDirection();
+        }
+
+        _rb.velocity = Vector2.zero;
+        _rb.AddForce(dashDirection * _dashForce, ForceMode2D.Impulse);
+
+        _isDashing = true;
+        _lastDashTime = Time.time;
+
+        Invoke(nameof(ResetDash), 0.2f);
+    }
+
+    private Vector2 GetMovementDirection()
+    {
+        var horizontal = Input.GetAxisRaw("Horizontal");
+        var vertical = Input.GetAxisRaw("Vertical");
+
+        return new Vector2(horizontal, vertical).normalized;
+    }
+
+    private Vector2 GetFacingDirection()
+    {
+        return Vector2.right;
+    }
+
+    private void ResetDash()
+    {
+        _isDashing = false;
     }
 }
