@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class RoomExit : MonoBehaviour
 {
-    [SerializeField] private Room _currentRoom;
     [SerializeField] private string _layerName;
+    [SerializeField] private Room _currentRoom;
 
     private EventHandler _onFinalStep;
     private bool _isFinalStep = false;

@@ -70,7 +70,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.03}
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 0.5, y: 0.18}
   m_Direction: 1
 --- !u!114 &2987335848365580410
 MonoBehaviour:
@@ -87,7 +87,8 @@ MonoBehaviour:
   _attackLayerName:
   - Enemy
   - Trap
-  _deleteTime: 1.5
+  - Wall
+  _deleteTime: 3
 --- !u!1 &6918392149890057659
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +141,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: fab39ea27c4c13045b3de3df8624145c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

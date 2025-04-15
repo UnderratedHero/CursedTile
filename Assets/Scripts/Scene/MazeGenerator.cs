@@ -11,7 +11,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private GameObject _torchPrefab;
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _trapPrefab;
-    [SerializeField] private GameObject _healPrefab;
+    [SerializeField] private GameObject _casinoPrefab;
 
     [SerializeField] private int _mazeWidth = 10;
     [SerializeField] private int _mazeHeight = 10;
@@ -28,19 +28,18 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private float _trapSpawnChance = 15f;
 
     [Range(0, 100)]
-    [SerializeField] private float _healSpawnChance = 10f;
+    [SerializeField] private float _casinoSpawnChance = 10f;
 
     private int[,] _mazeGrid;
     private bool[,] _visited;
     private Vector2[] _directions = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
+    private List<(int Column, int Row)> _occupaedTiles;
 
     private List<Vector2Int> _floorTiles = new List<Vector2Int>();
 
-    public GameObject Enter { get { return _enterPrefab; } }
-    public GameObject Exit { get { return _exitPrefab; } }
-
     public void GenerateMaze(Room room)
     {
+        _occupaedTiles = new List<(int Column, int Row)>();
         var exit = _exitPrefab.GetComponent<RoomExit>();
         exit.SetRoom(room);
 
@@ -130,21 +129,63 @@ public class MazeGenerator : MonoBehaviour
     {
         var roomPosition = transform.position;
 
-        var firstFloorTile = _floorTiles.First();
+        var startTile = _floorTiles.First();
+        var farthestTile = FindFarthestTile(startTile.x, startTile.y);
+
         var playerSpawnPosition = new Vector3(
-            roomPosition.x + firstFloorTile.x * _tileSize,
-            roomPosition.y + firstFloorTile.y * _tileSize,
+            roomPosition.x + startTile.x * _tileSize,
+            roomPosition.y + startTile.y * _tileSize,
             roomPosition.z
         );
         Instantiate(_enterPrefab, playerSpawnPosition, Quaternion.identity, transform);
+        _occupaedTiles.Add((startTile.x, startTile.y));
 
-        var lastFloorTile = _floorTiles.Last();
         var exitPosition = new Vector3(
-            roomPosition.x + lastFloorTile.x * _tileSize,
-            roomPosition.y + lastFloorTile.y * _tileSize,
+            roomPosition.x + farthestTile.x * _tileSize,
+            roomPosition.y + farthestTile.y * _tileSize,
             roomPosition.z
         );
         Instantiate(_exitPrefab, exitPosition, Quaternion.identity, transform);
+        _occupaedTiles.Add((farthestTile.x, farthestTile.y));
+    }
+
+    private Vector2Int FindFarthestTile(int startX, int startY)
+    {
+        var queue = new Queue<Vector2Int>();
+        var distances = new Dictionary<Vector2Int, int>();
+        queue.Enqueue(new Vector2Int(startX, startY));
+        distances[new Vector2Int(startX, startY)] = 0;
+
+        var farthestTile = new Vector2Int(startX, startY);
+        var maxDistance = 0;
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            var currentDistance = distances[current];
+
+            foreach (var direction in _directions)
+            {
+                var nextX = current.x + (int)direction.x;
+                var nextY = current.y + (int)direction.y;
+
+                var nextTile = new Vector2Int(nextX, nextY);
+
+                if (_mazeGrid[nextX, nextY] == 0 && !distances.ContainsKey(nextTile))
+                {
+                    distances[nextTile] = currentDistance + 1;
+                    queue.Enqueue(nextTile);
+
+                    if (currentDistance + 1 > maxDistance)
+                    {
+                        maxDistance = currentDistance + 1;
+                        farthestTile = nextTile;
+                    }
+                }
+            }
+        }
+
+        return farthestTile;
     }
 
     private void SpawnTorchesInCorners()
@@ -153,21 +194,25 @@ public class MazeGenerator : MonoBehaviour
 
         foreach (var tile in _floorTiles)
         {
-            if (IsCorner(tile.x, tile.y))
-            {
-                var randomValue = UnityEngine.Random.Range(0, 100);
+            if (!IsCorner(tile.x, tile.y))
+                continue;
 
-                if (randomValue <= _torchSpawnChance)
-                {
-                    var torchPosition = new Vector3(
-                        roomPosition.x + tile.x * _tileSize,
-                        roomPosition.y + tile.y * _tileSize,
-                        roomPosition.z
-                    );
+            if (IsOccupied(tile.x, tile.y))
+                continue;
 
-                    Instantiate(_torchPrefab, torchPosition, Quaternion.identity, transform);
-                }
-            }
+            var randomValue = Random.Range(0, 100);
+
+            if (randomValue > _torchSpawnChance)
+                continue;
+
+            var torchPosition = new Vector3(
+                   roomPosition.x + tile.x * _tileSize,
+                   roomPosition.y + tile.y * _tileSize,
+                   roomPosition.z
+               );
+
+            Instantiate(_torchPrefab, torchPosition, Quaternion.identity, transform);
+            _occupaedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -177,18 +222,22 @@ public class MazeGenerator : MonoBehaviour
 
         foreach (var tile in _floorTiles)
         {
-            var randomValue = UnityEngine.Random.Range(0, 100);
+            if (IsOccupied(tile.x, tile.y))
+                continue;
 
-            if (randomValue <= _enemySpawnChance)
-            {
-                var enemyPosition = new Vector3(
-                    roomPosition.x + tile.x * _tileSize,
-                    roomPosition.y + tile.y * _tileSize,
-                    roomPosition.z
-                );
+            var randomValue = Random.Range(0, 100);
 
-                Instantiate(_enemyPrefab, enemyPosition, Quaternion.identity, transform);
-            }
+            if (randomValue > _enemySpawnChance)
+                continue;
+
+            var enemyPosition = new Vector3(
+                roomPosition.x + tile.x * _tileSize,
+                roomPosition.y + tile.y * _tileSize,
+                roomPosition.z
+            );
+
+            Instantiate(_enemyPrefab, enemyPosition, Quaternion.identity, transform);
+            _occupaedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -198,18 +247,22 @@ public class MazeGenerator : MonoBehaviour
 
         foreach (var tile in _floorTiles)
         {
-            var randomValue = UnityEngine.Random.Range(0, 100);
+            if (IsOccupied(tile.x, tile.y))
+                continue;
 
-            if (randomValue <= _healSpawnChance)
-            {
-                var healPosition = new Vector3(
-                    roomPosition.x + tile.x * _tileSize,
-                    roomPosition.y + tile.y * _tileSize,
-                    roomPosition.z
-                );
+            var randomValue = Random.Range(0, 100);
 
-                Instantiate(_healPrefab, healPosition, Quaternion.identity, transform);
-            }
+            if (randomValue > _casinoSpawnChance)
+                continue;
+
+            var healPosition = new Vector3(
+                roomPosition.x + tile.x * _tileSize,
+                roomPosition.y + tile.y * _tileSize,
+                roomPosition.z
+            );
+
+            Instantiate(_casinoPrefab, healPosition, Quaternion.identity, transform);
+            _occupaedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -219,18 +272,22 @@ public class MazeGenerator : MonoBehaviour
 
         foreach (var tile in _floorTiles)
         {
-            var randomValue = UnityEngine.Random.Range(0, 100);
+            if (IsOccupied(tile.x, tile.y))
+                continue;
 
-            if (randomValue <= _trapSpawnChance)
-            {
-                var trapPosition = new Vector3(
-                    roomPosition.x + tile.x * _tileSize,
-                    roomPosition.y + tile.y * _tileSize,
-                    roomPosition.z
-                );
+            var randomValue = Random.Range(0, 100);
 
-                Instantiate(_trapPrefab, trapPosition, Quaternion.identity, transform);
-            }
+            if (randomValue > _trapSpawnChance)
+                continue;
+
+            var trapPosition = new Vector3(
+                roomPosition.x + tile.x * _tileSize,
+                roomPosition.y + tile.y * _tileSize,
+                roomPosition.z
+            );
+
+            Instantiate(_trapPrefab, trapPosition, Quaternion.identity, transform);
+            _occupaedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -242,6 +299,14 @@ public class MazeGenerator : MonoBehaviour
         var isBottomRightCorner = _mazeGrid[x, y - 1] == 1 && _mazeGrid[x + 1, y] == 1;
 
         return isTopLeftCorner || isTopRightCorner || isBottomLeftCorner || isBottomRightCorner;
+    }
+
+    private bool IsOccupied(int x, int y)
+    {
+        if (_occupaedTiles.Any(v => v.Column == x && v.Row == y))
+            return true;
+
+        return false;
     }
 
     private void Shuffle(Vector2[] array)

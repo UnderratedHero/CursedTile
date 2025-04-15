@@ -27,10 +27,9 @@ public class Bullet : MonoBehaviour
                 continue;
 
 
-            if (!collision.TryGetComponent<Health>(out var heath))
-                return;
+            if (collision.TryGetComponent<Health>(out var heath))
+                heath.Damage(_damage);
 
-            heath.Damage(_damage);
             Destroy();
         }
     }

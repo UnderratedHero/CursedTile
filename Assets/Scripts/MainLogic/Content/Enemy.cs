@@ -8,11 +8,6 @@ public class Enemy : MonoBehaviour
 
     private Transform _target;
 
-    private void OnEnable()
-    {
-        _health.OnEntityDead += DropLoot;
-    }
-
     void Start()
     {
         var root = transform.parent.parent;
@@ -36,15 +31,5 @@ public class Enemy : MonoBehaviour
         
         var direction = (_target.position - transform.position).normalized;
         transform.Translate(direction * _speed * Time.deltaTime, Space.World);
-    }
-
-    private void OnDestroy()
-    {
-        _health.OnEntityDead -= DropLoot;
-    }
-
-    private void DropLoot()
-    {
-
     }
 }

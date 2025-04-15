@@ -7,13 +7,25 @@ public class TrapRangeAttackPosition : MonoBehaviour
     [SerializeField] private GameObject _prefab;
     [SerializeField] private float _damage; 
     [SerializeField] private float _force; 
-    [SerializeField] private Collider2D _checkZone;
-    [SerializeField] private Collider2D _exitZone;
+    [SerializeField] private CheckZone _checkZone;
+    [SerializeField] private ExitZone _exitZone;
     [SerializeField] private float _attackTimeDelay = 1f;
 
     private Transform _currentTarget;
     private float _attackTimer = 0f; 
-    private bool _canAttack = false; 
+    private bool _canAttack = false;
+
+    private void OnEnable()
+    {
+        _checkZone.OnEnter += OnEnter;
+        _exitZone.OnExit += OnExit;
+    }
+
+    private void OnDisable()
+    {
+        _checkZone.OnEnter -= OnEnter;
+        _exitZone.OnExit -= OnExit;
+    }
 
     private void Update()
     {
@@ -48,17 +60,20 @@ public class TrapRangeAttackPosition : MonoBehaviour
         rigidBody.AddForce(direction * _force, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!_checkZone.enabled || _currentTarget != null || _exitZone.enabled)
-            return;
 
+    private void OnEnter(Collider2D collision)
+    {
         foreach (var attackLayer in _attackLayerName)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer(attackLayer))
             {
+                if (!_checkZone.enabled ||
+                    _currentTarget != null ||
+                    _exitZone.gameObject.activeInHierarchy)
+                    return;
+
                 _currentTarget = collision.transform;
-                _canAttack = true; 
+                _canAttack = true;
                 _checkZone.enabled = false;
                 _exitZone.enabled = true;
                 break;
@@ -66,16 +81,17 @@ public class TrapRangeAttackPosition : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnExit(Collider2D collision)
     {
         if (_checkZone.enabled ||
-            _currentTarget.position != collision.transform.position ||
-            !_exitZone.enabled)
+       _currentTarget.position != collision.transform.position ||
+       !_exitZone.enabled)
             return;
 
         _currentTarget = null;
         _canAttack = false;
         _checkZone.enabled = true;
         _exitZone.enabled = false;
+
     }
 }

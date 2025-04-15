@@ -65,11 +65,11 @@ MonoBehaviour:
   _torchPrefab: {fileID: 8852433495066503918, guid: 70327fed591922342b3c137c5ea0091c, type: 3}
   _enemyPrefab: {fileID: 7062898329000962866, guid: 0a30fe407919adc40a34d30c80315752, type: 3}
   _trapPrefab: {fileID: 3520388397974470750, guid: cd9cd82951d1cf049806afd977d97914, type: 3}
-  _healPrefab: {fileID: 2655480067668607878, guid: b230add289ac9324aae478ed7c07b904, type: 3}
-  _mazeWidth: 15
-  _mazeHeight: 15
+  _casinoPrefab: {fileID: 7742858160760973431, guid: 7ce192fc722cab340a9826b0a5895cc8, type: 3}
+  _mazeWidth: 20
+  _mazeHeight: 20
   _tileSize: 3
   _torchSpawnChance: 17
-  _enemySpawnChance: 3.2
-  _trapSpawnChance: 3.2
-  _healSpawnChance: 2
+  _enemySpawnChance: 8
+  _trapSpawnChance: 8
+  _casinoSpawnChance: 1
