@@ -300,7 +300,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1372917426, guid: 35c32a7b45dd37c4383d3fbfd1e37ebb, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 8762017738501452774}
   - component: {fileID: 4730337474781043382}
   - component: {fileID: -8422421059422807990}
+  - component: {fileID: 1275728396075721729}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -395,7 +396,7 @@ Transform:
   m_GameObject: {fileID: 7062898329000962866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1584420228630166849}
@@ -433,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetName: Character
-  _speed: 3
   _health: {fileID: 2250991076145316445}
 --- !u!114 &2250991076145316445
 MonoBehaviour:
@@ -5478,3 +5478,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &1275728396075721729
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062898329000962866}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.2823092
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.5646186
+  m_BaseOffset: 1.2823093
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

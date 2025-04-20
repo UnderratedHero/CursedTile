@@ -1,13 +1,13 @@
+using NavMeshPlus.Components;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomPlacer : MonoBehaviour
 {
     [SerializeField] private GameObject _roomPrefab;
     [SerializeField] private GameObject _character;
-    [SerializeField] private float _roomPositionStep;
+    [SerializeField] private NavMeshSurface _surface;
     [SerializeField] private Vector3 _leftEnd;
     [SerializeField] private Vector3 _rightEnd;
 
@@ -22,6 +22,20 @@ public class RoomPlacer : MonoBehaviour
         GeneratePositions();
         SpawnRooms();
         SpawnCharacter();
+    }
+
+    private void Start()
+    {
+        BakeSurface();
+    }
+
+    private void BakeSurface()
+    {
+        _surface.RemoveData();
+        _surface.BuildNavMesh();
+
+        foreach (var room in _rooms)
+            room.SpawnEnemies();
     }
 
     private void GeneratePositions()
@@ -51,9 +65,9 @@ public class RoomPlacer : MonoBehaviour
             var position = _roomPositions[i];
             var room = Instantiate(_roomPrefab, position, Quaternion.identity, transform);
 
-            var data = room.GetComponent<Room>();
-            data.SetInformation(i, tile);
-            _rooms.Add(data);
+            var roomData = room.GetComponent<Room>();
+            roomData.SetInformation(i, tile);
+            _rooms.Add(roomData);
         }
     }
 

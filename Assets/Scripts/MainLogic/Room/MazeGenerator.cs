@@ -71,7 +71,6 @@ public class MazeGenerator : MonoBehaviour
 
         SpawnEnterAndExit();
         SpawnTorchesInCorners();
-        SpawnEnemies();
         SpawnHeals();
         SpawnTraps();
     }
@@ -108,10 +107,10 @@ public class MazeGenerator : MonoBehaviour
             for (var y = 0; y < _mazeHeight; y++)
             {
                 var position = new Vector3(
-                    roomPosition.x + x * _tileSize,
-                    roomPosition.y + y * _tileSize,
-                    roomPosition.z
-                );
+                     roomPosition.x + x * _tileSize - _tileSize / 2f,
+                     roomPosition.y + y * _tileSize - _tileSize / 2f,
+                     roomPosition.z
+                 );
 
                 if (_mazeGrid[x, y] == 1)
                 {
@@ -133,16 +132,16 @@ public class MazeGenerator : MonoBehaviour
         var farthestTile = FindFarthestTile(startTile.x, startTile.y);
 
         var playerSpawnPosition = new Vector3(
-            roomPosition.x + startTile.x * _tileSize,
-            roomPosition.y + startTile.y * _tileSize,
+            roomPosition.x + startTile.x * _tileSize - _tileSize / 2f,
+            roomPosition.y + startTile.y * _tileSize - _tileSize / 2f,
             roomPosition.z
         );
         Instantiate(_enterPrefab, playerSpawnPosition, Quaternion.identity, transform);
         _occupaedTiles.Add((startTile.x, startTile.y));
 
         var exitPosition = new Vector3(
-            roomPosition.x + farthestTile.x * _tileSize,
-            roomPosition.y + farthestTile.y * _tileSize,
+            roomPosition.x + farthestTile.x * _tileSize - _tileSize / 2f,
+            roomPosition.y + farthestTile.y * _tileSize - _tileSize / 2f,
             roomPosition.z
         );
         Instantiate(_exitPrefab, exitPosition, Quaternion.identity, transform);
@@ -206,8 +205,8 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             var torchPosition = new Vector3(
-                   roomPosition.x + tile.x * _tileSize,
-                   roomPosition.y + tile.y * _tileSize,
+                   roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
+                   roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
                    roomPosition.z
                );
 
@@ -216,7 +215,7 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private void SpawnEnemies()
+    public void SpawnEnemies()
     {
         var roomPosition = transform.position;
 
@@ -231,8 +230,8 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             var enemyPosition = new Vector3(
-                roomPosition.x + tile.x * _tileSize,
-                roomPosition.y + tile.y * _tileSize,
+                roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
+                roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
                 roomPosition.z
             );
 
@@ -256,8 +255,8 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             var healPosition = new Vector3(
-                roomPosition.x + tile.x * _tileSize,
-                roomPosition.y + tile.y * _tileSize,
+                roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
+                roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
                 roomPosition.z
             );
 
@@ -281,8 +280,8 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             var trapPosition = new Vector3(
-                roomPosition.x + tile.x * _tileSize,
-                roomPosition.y + tile.y * _tileSize,
+                roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
+                roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
                 roomPosition.z
             );
 

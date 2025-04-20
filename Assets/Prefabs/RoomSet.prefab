@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6874518667413747514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6689901, y: 0.7578207, z: 0.12303951}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomPrefab: {fileID: 3180455417846485340, guid: 7d63e014a196beb4981f02b0df7b7efa, type: 3}
-  _character: {fileID: 0}
-  _roomPositionStep: 15
+  _character: {fileID: 7546784272181976590, guid: 318292e8d2978144797db0a1addd0365, type: 3}
+  _surface: {fileID: 0}
   _leftEnd: {x: 0, y: 0, z: 0}
   _rightEnd: {x: 600, y: 0, z: 0}
 --- !u!114 &8626891549568779173

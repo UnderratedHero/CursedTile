@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3180455417846485331}
   - component: {fileID: 8155304282410735506}
   - component: {fileID: 179290987633001362}
+  - component: {fileID: 6886616344261803355}
   m_Layer: 0
   m_Name: RoomPrefab
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3180455417846485340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mazeGenerator: {fileID: 179290987633001362}
+  _tileMapGenerator: {fileID: 6886616344261803355}
 --- !u!114 &179290987633001362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,10 +68,25 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 7062898329000962866, guid: 0a30fe407919adc40a34d30c80315752, type: 3}
   _trapPrefab: {fileID: 3520388397974470750, guid: cd9cd82951d1cf049806afd977d97914, type: 3}
   _casinoPrefab: {fileID: 7742858160760973431, guid: 7ce192fc722cab340a9826b0a5895cc8, type: 3}
-  _mazeWidth: 20
-  _mazeHeight: 20
+  _mazeWidth: 21
+  _mazeHeight: 21
   _tileSize: 3
   _torchSpawnChance: 17
   _enemySpawnChance: 8
   _trapSpawnChance: 8
   _casinoSpawnChance: 1
+--- !u!114 &6886616344261803355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3180455417846485340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7de86771e34c5f40b0dc8698ad0acfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallTile: {fileID: 11400000, guid: 94eb31677de733a4d8b10a5032408a08, type: 2}
+  _floorTile: {fileID: 11400000, guid: c05e2cbe7d2b4ed4787cbe262ee91394, type: 2}
+  _tileSize: 3
