@@ -3,16 +3,26 @@ using UnityEngine;
 
 public class EnemyMeleeAttackPosition : MonoBehaviour
 {
-    [SerializeField] private List<string> _attackLayerName;
     [SerializeField] private MeleeAttack _melee;
-    [SerializeField] private GameObject _checkZone;
+    [SerializeField] private CheckZone _checkZone;
     [SerializeField] private float _attackTimeDelay = 3f;
     [SerializeField] private float _attackActiveTime = 1f;
     [SerializeField] private float _damage = 3f;
+    [SerializeField] private List<string> _attackLayerName;
 
     private bool _isAttacking = false;
     private float _timer = 0f;
     private float _activeTimer = 0f;
+
+    private void OnEnable()
+    {
+        _checkZone.OnEnter += CheckEnterZone;
+    }
+
+    private void OnDisable()
+    {
+        _checkZone.OnEnter -= CheckEnterZone;
+    }
 
     private void Start()
     {
@@ -42,13 +52,13 @@ public class EnemyMeleeAttackPosition : MonoBehaviour
         {
             _isAttacking = false;
             _timer = 0f;
-            _checkZone.SetActive(true);
+            _checkZone.gameObject.SetActive(true);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckEnterZone(Collider2D collision)
     {
-        if (!_checkZone.activeInHierarchy || _isAttacking)
+        if (_isAttacking)
             return;
 
         foreach (string attackLayer in _attackLayerName)
@@ -63,8 +73,8 @@ public class EnemyMeleeAttackPosition : MonoBehaviour
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             _melee.transform.rotation = Quaternion.Euler(0, 0, angle);
 
+            _checkZone.gameObject.SetActive(false);
             _melee.gameObject.SetActive(true);
-            _checkZone.SetActive(false);
             break;
         }
     }

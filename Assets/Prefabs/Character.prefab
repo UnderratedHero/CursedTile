@@ -217,6 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b56471186c94c34f86d20cad78d5324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackLayerName:
+  - Enemy
+  - Trap
 --- !u!1 &4915968808266362281
 GameObject:
   m_ObjectHideFlags: 0
