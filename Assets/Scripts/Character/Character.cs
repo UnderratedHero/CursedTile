@@ -1,7 +1,9 @@
 using Assets.Scripts.Character;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Character : MonoBehaviour, IControllable
 {
@@ -14,10 +16,16 @@ public class Character : MonoBehaviour, IControllable
     [SerializeField] private float _dashForce = 10f;
     [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Health _health;
+    [SerializeField] private Light2D _light;
+    [SerializeField] private PlayerAnimationControl _playerAnimationControl;
 
     private WeaponConfig _currentWeaponConfig;
     private bool _isDashing = false; 
+    private bool _isBuffed = false;
     private float _lastDashTime = 0f; 
+
+    public Health Health { get { return _health; } }
 
     public float LastDashTime { get { return _lastDashTime; } }
     public bool IsDashing { get { return _isDashing; } }
@@ -29,12 +37,28 @@ public class Character : MonoBehaviour, IControllable
         _currentWeaponConfig = _weaponConfigs.First();
         _weapon.gameObject.SetActive(true);
         _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
+        _attackArea.SetDamage(_currentWeaponConfig.Damage);
+        _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
     }
 
     public void SwitchWeapon()
     {   
         _currentWeaponConfig = _weaponConfigs.FirstOrDefault(v => v.Id != _currentWeaponConfig.Id);
         _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
+
+        switch (_currentWeaponConfig.WeaponType)
+        {
+            case WeaponType.Melee:
+                if (!_isBuffed)
+                    _attackArea.SetDamage(_currentWeaponConfig.Damage);
+                break;
+            case WeaponType.Range:
+                if (!_isBuffed)
+                    _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
+                break;
+            case WeaponType.Magic:
+                break;
+        }
     }
 
     public void Attack()
@@ -42,12 +66,11 @@ public class Character : MonoBehaviour, IControllable
         switch (_currentWeaponConfig.WeaponType)
         {
             case WeaponType.Melee:
-                _attackArea.SetDamage(_currentWeaponConfig.Damage);
                 _attackArea.gameObject.SetActive(true);
                 break;
             case WeaponType.Range:
                 _rangeAttack.gameObject.SetActive(true);
-                _rangeAttack.Shoot(_currentWeaponConfig.Damage, _currentWeaponConfig.AttackSpeed);
+                _rangeAttack.Shoot(_currentWeaponConfig.AttackSpeed);
                 break;
             case WeaponType.Magic:
                 break;
@@ -57,6 +80,12 @@ public class Character : MonoBehaviour, IControllable
     public void Move(Vector2 vector)
     {
         _character.transform.position += new Vector3(vector.x, vector.y) * _moveSpeed * Time.deltaTime;
+        _playerAnimationControl.SetAnimation(vector);
+    }
+
+    public void SetBuff(BuffConfig config)
+    {
+        StartCoroutine(StartBuffRoutine(config));
     }
 
     public void Unack()
@@ -94,6 +123,11 @@ public class Character : MonoBehaviour, IControllable
         Invoke(nameof(ResetDash), 0.2f);
     }
 
+    public void GetDiceDamage(int damage)
+    {
+        _health.Damage(damage);
+    }
+
     private Vector2 GetMovementDirection()
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
@@ -110,5 +144,43 @@ public class Character : MonoBehaviour, IControllable
     private void ResetDash()
     {
         _isDashing = false;
+    }
+
+    private IEnumerator StartBuffRoutine(BuffConfig config)
+    {
+        _isBuffed = true;
+
+        switch (config.Type)
+        {
+            case BuffType.Damage:
+                _rangeAttack.SetDamage(config.Increase);
+                _attackArea.SetDamage(config.Increase);
+                _light.color = config.Color;
+                break;
+            case BuffType.Health:
+                _health.BuffHealth(config.Increase);
+                _light.color = config.Color;
+                break;
+            case BuffType.Movement:
+                _moveSpeed += config.Increase;
+                _light.color = config.Color;
+                break;
+        }
+        _light.intensity = 3;
+
+        yield return new WaitForSeconds(config.Duration);
+
+        _isBuffed = false;
+        _light.color = Color.white;
+        _light.intensity = 1;
+        switch (config.Type)
+        {
+            case BuffType.Health:
+                _health.ResetHealth();
+                break;
+            case BuffType.Movement:
+                _moveSpeed -= config.Increase;
+                break;
+        }
     }
 }

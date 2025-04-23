@@ -68,8 +68,7 @@ public class TrapRangeAttackPosition : MonoBehaviour
             if (collision.gameObject.layer == LayerMask.NameToLayer(attackLayer))
             {
                 if (!_checkZone.enabled ||
-                    _currentTarget != null ||
-                    _exitZone.gameObject.activeInHierarchy)
+                    _currentTarget != null)
                     return;
 
                 _currentTarget = collision.transform;
@@ -84,8 +83,7 @@ public class TrapRangeAttackPosition : MonoBehaviour
     private void OnExit(Collider2D collision)
     {
         if (_checkZone.enabled ||
-       _currentTarget.position != collision.transform.position ||
-       !_exitZone.enabled)
+       _currentTarget.position != collision.transform.position)
             return;
 
         _currentTarget = null;

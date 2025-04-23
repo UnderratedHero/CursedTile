@@ -72,4 +72,4 @@ MonoBehaviour:
   _torchSpawnChance: 17
   _enemySpawnChance: 8
   _trapSpawnChance: 8
-  _casinoSpawnChance: 1
+  _casinoSpawnChance: 8
