@@ -5,11 +5,12 @@ using UnityEngine;
 public class CharacterInputController : MonoBehaviour
 {
     [SerializeField] private GameObject _controlableGameObject;
+    [SerializeField] private float _attackTime = 0.25f;
+    
     private IControllable _controlableCharacter;
     private GameInput _gameInput;
 
     private bool _isAttacking = false;
-    private float _attackTime = 0.25f;
     private float _timer = 0f;
 
 
@@ -50,8 +51,7 @@ public class CharacterInputController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _isAttacking = true;
-            _controlableCharacter.Attack();
+            StartAttack();
         }
 
         if (!_isAttacking)
@@ -61,10 +61,25 @@ public class CharacterInputController : MonoBehaviour
 
         if (_timer > _attackTime)
         {
-            _isAttacking = false;
-            _timer = 0f;
-            _controlableCharacter.Unack();
+            EndAttack();
         }
+    }
+
+    private void StartAttack()
+    {
+        if (_isAttacking)
+            return;
+
+        _isAttacking = true;
+        _timer = 0f;
+        _controlableCharacter.Attack();
+    }
+
+    private void EndAttack()
+    {
+        _isAttacking = false;
+        _timer = 0f;
+        _controlableCharacter.Unack();
     }
 
     private void SwitchWeaponRead()

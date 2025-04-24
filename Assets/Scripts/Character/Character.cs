@@ -20,6 +20,8 @@ public class Character : MonoBehaviour, IControllable
     [SerializeField] private Light2D _light;
     [SerializeField] private PlayerAnimationControl _playerAnimationControl;
 
+    private List<(int x, int y)> _examinedTiles = new List<(int x, int y)>();
+    private (int x, int y) _currentFloorTileId;
     private WeaponConfig _currentWeaponConfig;
     private bool _isDashing = false; 
     private bool _isBuffed = false;
@@ -30,6 +32,8 @@ public class Character : MonoBehaviour, IControllable
     public float LastDashTime { get { return _lastDashTime; } }
     public bool IsDashing { get { return _isDashing; } }
     public float DashCooldown {  get { return _dashCooldown; } }
+    public List<(int x, int y)> ExaminedTiles {  get { return _examinedTiles; } }
+    public (int x, int y) CurrentFloorTileId { get { return _currentFloorTileId; } }
 
 
     private void Start()
@@ -39,6 +43,21 @@ public class Character : MonoBehaviour, IControllable
         _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
         _attackArea.SetDamage(_currentWeaponConfig.Damage);
         _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
+    }
+
+    public void SetCurrentTile(int x, int y)
+    {
+        _currentFloorTileId.x = x;
+        _currentFloorTileId.y = y;
+        
+        if (!_examinedTiles.Any(v => v == _currentFloorTileId))
+            _examinedTiles.Add(_currentFloorTileId);
+    }
+
+    public void ClearExaminedTiles()
+    {
+        _examinedTiles = new List<(int x, int y)>();
+        _currentFloorTileId = (-1, -1);
     }
 
     public void SwitchWeapon()

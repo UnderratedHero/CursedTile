@@ -22,6 +22,7 @@ public class Dice : MonoBehaviour
         }
 
         int finalSide = GetRandomWeightedSide();
+        rend.sprite = diceSides[finalSide - 1];
         onRollComplete?.Invoke(finalSide);
     }
 

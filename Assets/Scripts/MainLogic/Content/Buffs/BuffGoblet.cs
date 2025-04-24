@@ -90,13 +90,14 @@ public class BuffGoblet : MonoBehaviour
     {
         if (_buff.CurrentConfig.Points > resultSum)
         {
+            await Task.Delay(1500);
             Destroy(gameObject);
             return;
         }
 
         _buff.UseConfig(_player);
 
-        await Task.Delay(1000);
+        await Task.Delay(1500);
         Destroy(gameObject);
     }
 }

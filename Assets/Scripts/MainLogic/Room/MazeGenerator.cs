@@ -118,7 +118,9 @@ public class MazeGenerator : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(_floorPrefab, position, Quaternion.identity, transform);
+                    var floorObject = Instantiate(_floorPrefab, position, Quaternion.identity, transform);
+                    var floor = floorObject.GetComponent<FloorTile>();
+                    floor.SetId(x,y);
                 }
             }
         }

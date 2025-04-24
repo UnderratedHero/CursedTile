@@ -35,6 +35,8 @@ public class RoomExit : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer(_layerName) || other == null)
             return;
 
+        other.GetComponent<Character>().ClearExaminedTiles();
+
         if (_isFinalStep)
         {
             _onFinalStep?.TriggerAction();
