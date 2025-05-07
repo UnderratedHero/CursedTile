@@ -6,10 +6,7 @@ public class MouseFollow : MonoBehaviour
 
     private void Start()
     {
-        if (_mainCam == null)
-        {
-            _mainCam = Camera.main;
-        }
+        _mainCam = Camera.main;
 
         if (_mainCam == null)
         {
@@ -26,13 +23,16 @@ public class MouseFollow : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        var mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = transform.position.z;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Mathf.Abs(_mainCam.transform.position.z - transform.position.z);
+        mousePos = _mainCam.ScreenToWorldPoint(mousePos);
 
-        var direction = mousePos - transform.position;
+        Vector3 direction = mousePos - transform.position;
 
-        var rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        }
     }
 }

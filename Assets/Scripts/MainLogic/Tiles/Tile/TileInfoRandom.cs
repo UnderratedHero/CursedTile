@@ -5,16 +5,14 @@ public class TileInfoRandom
 {
     private TileType _type;
     private DifficultyLevel _difficulty;
-    private bool _isGuaranteeFill;
     private Sprite _sprite;
 
-    private const float FillConstant = 0.5f;
-    
     public Sprite Sprite {  get { return _sprite; } }
     public TileType Type {  get { return _type; } } 
     public DifficultyLevel DifficultyLevel { get { return _difficulty; } }
-    public bool IsGuaranteeFill { get {  return _isGuaranteeFill; } }
 
+
+    public TileInfoRandom() { }
 
     public TileInfoRandom(TileClusterConfig config)
     {
@@ -25,7 +23,6 @@ public class TileInfoRandom
     {
         GetRandomTileType(config);
         GetRandomDifficultyLevel(config);
-        GetRandomFill();
         _sprite = config.Sprites.FirstOrDefault(v => v.tileType == _type).sprite;
     }
 
@@ -47,10 +44,5 @@ public class TileInfoRandom
 
         var randomIndex = Random.Range(0, difficulty.Count);
         _difficulty = difficulty[randomIndex];
-    }
-
-    private void GetRandomFill()
-    {
-       _isGuaranteeFill = Random.value > FillConstant;
     }
 }

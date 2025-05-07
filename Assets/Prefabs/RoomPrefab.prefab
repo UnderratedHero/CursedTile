@@ -69,7 +69,4 @@ MonoBehaviour:
   _mazeWidth: 21
   _mazeHeight: 21
   _tileSize: 3
-  _torchSpawnChance: 17
-  _enemySpawnChance: 8
-  _trapSpawnChance: 8
-  _casinoSpawnChance: 8
+  _trashHold: 70

@@ -9,8 +9,10 @@ public class Heal : MonoBehaviour
         if (!collision.TryGetComponent<Health>(out var heath))
             return;
 
+        if (heath.EntityHealth == heath.EntityMaxHealth)
+            return;
+
         heath.Heal(_heal);
-        Debug.Log($"Healed {_heal} HP");
         Destroy(gameObject);
     }
 }

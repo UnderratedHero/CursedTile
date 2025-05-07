@@ -15,20 +15,10 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField] private int _mazeWidth = 10;
     [SerializeField] private int _mazeHeight = 10;
-
     [SerializeField] private float _tileSize = 1f;
+    [SerializeField] private float _trashHold = 10f;
 
-    [Range(0, 100)]
-    [SerializeField] private int _torchSpawnChance = 50;
-
-    [Range(0, 100)]
-    [SerializeField] private float _enemySpawnChance = 20f;
-
-    [Range(0, 100)]
-    [SerializeField] private float _trapSpawnChance = 15f;
-
-    [Range(0, 100)]
-    [SerializeField] private float _casinoSpawnChance = 10f;
+    private Room _room;
 
     private int[,] _mazeGrid;
     private bool[,] _visited;
@@ -39,6 +29,7 @@ public class MazeGenerator : MonoBehaviour
 
     public void GenerateMaze(Room room)
     {
+        _room = room;
         _occupaedTiles = new List<(int Column, int Row)>();
         var exit = _exitPrefab.GetComponent<RoomExit>();
         exit.SetRoom(room);
@@ -71,8 +62,8 @@ public class MazeGenerator : MonoBehaviour
 
         SpawnEnterAndExit();
         SpawnTorchesInCorners();
-        SpawnHeals();
         SpawnTraps();
+        SpawnCasino();
     }
 
     private void CarvePassagesFrom(int startX, int startY)
@@ -201,16 +192,17 @@ public class MazeGenerator : MonoBehaviour
             if (IsOccupied(tile.x, tile.y))
                 continue;
 
+            float spawnChance = 1 / ((int)_room.Data.DifficultyLevel * _trashHold);
             var randomValue = Random.Range(0, 100);
 
-            if (randomValue > _torchSpawnChance)
+            if (randomValue > spawnChance * 1000)
                 continue;
 
             var torchPosition = new Vector3(
-                   roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
-                   roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
-                   roomPosition.z
-               );
+                roomPosition.x + tile.x * _tileSize - _tileSize / 2f,
+                roomPosition.y + tile.y * _tileSize - _tileSize / 2f,
+                roomPosition.z
+            );
 
             Instantiate(_torchPrefab, torchPosition, Quaternion.identity, transform);
             _occupaedTiles.Add((tile.x, tile.y));
@@ -227,8 +219,8 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             var randomValue = Random.Range(0, 100);
-
-            if (randomValue > _enemySpawnChance)
+            float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
+            if (randomValue > spawnChance * 100)
                 continue;
 
             var enemyPosition = new Vector3(
@@ -242,7 +234,7 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private void SpawnHeals()
+    private void SpawnCasino()
     {
         var roomPosition = transform.position;
 
@@ -253,7 +245,8 @@ public class MazeGenerator : MonoBehaviour
 
             var randomValue = Random.Range(0, 100);
 
-            if (randomValue > _casinoSpawnChance)
+            float spawnChance = 1 / (((int)_room.Data.DifficultyLevel) * _trashHold);
+            if (randomValue > spawnChance * 100)
                 continue;
 
             var healPosition = new Vector3(
@@ -278,7 +271,8 @@ public class MazeGenerator : MonoBehaviour
 
             var randomValue = Random.Range(0, 100);
 
-            if (randomValue > _trapSpawnChance)
+            float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
+            if (randomValue > spawnChance * 100)
                 continue;
 
             var trapPosition = new Vector3(

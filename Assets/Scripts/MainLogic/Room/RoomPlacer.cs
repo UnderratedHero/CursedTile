@@ -47,7 +47,7 @@ public class RoomPlacer : MonoBehaviour
 
         float totalDistance = Vector3.Distance(_leftEnd, _rightEnd);
         float distancePerStep = totalDistance / (_tilesInfo.Count - 1);
-        for (int i = 0; i < _tilesInfo.Count; i++)
+        for (int i = 0; i < 6; i++)
         {
             var newPosition = _leftEnd + direction * distancePerStep * i;
             _roomPositions.Add(newPosition);
@@ -56,17 +56,27 @@ public class RoomPlacer : MonoBehaviour
 
     private void SpawnRooms()
     {
-        if (!_tilesInfo.Any() || !_roomPositions.Any())
+        if (!_roomPositions.Any())
             return;
 
-        for (int i = 0; i < _tilesInfo.Count; i++)
+        for (int i = 0; i < 6; i++)
         {
-            var tile = _tilesInfo[i];
+            var tile = new TileInfoRandom();
+            
+            if (_tilesInfo.Count > i && _tilesInfo[i] != null)
+                tile = _tilesInfo[i];
+            
             var position = _roomPositions[i];
             var room = Instantiate(_roomPrefab, position, Quaternion.identity, transform);
 
             var roomData = room.GetComponent<Room>();
-            roomData.SetInformation(i, tile);
+
+            if (tile != null)
+                roomData.SetInformation(i, tile);
+            else
+                roomData.SetInformation(i);
+            
+            roomData.GenerateMaze();
             _rooms.Add(roomData);
         }
     }

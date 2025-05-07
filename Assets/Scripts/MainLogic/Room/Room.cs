@@ -8,16 +8,22 @@ public class Room : MonoBehaviour
     private TileInfoRandom _data;
 
     public int Id { get { return _id; } }
+    public TileInfoRandom Data { get { return _data; } }
 
     public void SpawnEnemies()
     {
         _mazeGenerator.SpawnEnemies();
     }
 
-    public void SetInformation(int id, TileInfoRandom info)
+    public void SetInformation(int id, TileInfoRandom info = null)
     {
         _id = id;
-        _data = info;
+        if (info != null) 
+            _data = info;
+    }
+
+    public void GenerateMaze()
+    {
         _mazeGenerator.GenerateMaze(this);
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RoomForming : MonoBehaviour
 {
-    [SerializeField] private SceneManage _sceneManage;
     private List<GameObject> _tiles;
 
     private void Awake()
@@ -32,16 +31,5 @@ public class RoomForming : MonoBehaviour
         }
 
         TileDataManager.UpdateData(result);
-    }
-
-    public void SetReady()
-    {
-        if (_tiles.Count < 2)
-        {
-            _sceneManage.SwitchState(false);
-            return;
-        }
-
-        _sceneManage.SwitchState(true);
-    }    
+    }   
 }

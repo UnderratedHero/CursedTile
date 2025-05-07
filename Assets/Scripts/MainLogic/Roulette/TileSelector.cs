@@ -4,7 +4,7 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private string _targetLayerName;
-    [SerializeField] private EventHandler _eventHandler;
+    [SerializeField] private string _sceneName;
     
     private int _targetLayer;
     private List<TileInfoRandom> _tiles; 
@@ -25,6 +25,6 @@ public class TileSelector : MonoBehaviour
 
         _tiles = tileCluster.Tiles;
         TileDataManager.Initialize(_tiles);
-        _eventHandler?.TriggerAction();
+        SceneTransition.SwitchToScene(_sceneName);
     }
 }

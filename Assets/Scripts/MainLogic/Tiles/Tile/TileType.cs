@@ -1,13 +1,13 @@
 public enum TileType
 {
-    Enemy,
-    Heal, 
-    Trap
+    Enemy = 3, 
+    Heal = 1,   
+    Trap = 2  
 }
 
 public enum DifficultyLevel
 {
-    Low,
-    Middle,
-    High
+    Low = 3,   
+    Middle = 6, 
+    High = 9   
 }

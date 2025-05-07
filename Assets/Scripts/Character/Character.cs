@@ -25,7 +25,8 @@ public class Character : MonoBehaviour, IControllable
     private WeaponConfig _currentWeaponConfig;
     private bool _isDashing = false; 
     private bool _isBuffed = false;
-    private float _lastDashTime = 0f; 
+    private float _lastDashTime = 0f;
+    private int _arrowsAmount = 10;
 
     public Health Health { get { return _health; } }
 
@@ -34,6 +35,7 @@ public class Character : MonoBehaviour, IControllable
     public float DashCooldown {  get { return _dashCooldown; } }
     public List<(int x, int y)> ExaminedTiles {  get { return _examinedTiles; } }
     public (int x, int y) CurrentFloorTileId { get { return _currentFloorTileId; } }
+    public int ArrowsAmount { get { return _arrowsAmount; } }   
 
 
     private void Start()
@@ -43,6 +45,11 @@ public class Character : MonoBehaviour, IControllable
         _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
         _attackArea.SetDamage(_currentWeaponConfig.Damage);
         _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
+    }
+
+    public void AddArrows(int arrows)
+    {
+        _arrowsAmount += arrows;
     }
 
     public void SetCurrentTile(int x, int y)
@@ -88,8 +95,12 @@ public class Character : MonoBehaviour, IControllable
                 _attackArea.gameObject.SetActive(true);
                 break;
             case WeaponType.Range:
+                if (_arrowsAmount <= 0)
+                    return;
+
                 _rangeAttack.gameObject.SetActive(true);
                 _rangeAttack.Shoot(_currentWeaponConfig.AttackSpeed);
+                _arrowsAmount--;
                 break;
             case WeaponType.Magic:
                 break;

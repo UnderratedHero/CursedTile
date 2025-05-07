@@ -414,9 +414,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916c051f52f24ce45a5a81545727d682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loot: {fileID: 2655480067668607878, guid: b230add289ac9324aae478ed7c07b904, type: 3}
+  _loot:
+  - {fileID: 2655480067668607878, guid: b230add289ac9324aae478ed7c07b904, type: 3}
+  - {fileID: 4281797849026622922, guid: d5e6a7097e1385e49b8e6e31f2e15acb, type: 3}
   _health: {fileID: 2250991076145316445}
-  _lootDropChance: 10
+  _lootDropChance: 40
 --- !u!114 &673988033913175805
 MonoBehaviour:
   m_ObjectHideFlags: 0
