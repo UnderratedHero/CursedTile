@@ -28,7 +28,10 @@ public class Bullet : MonoBehaviour
 
 
             if (collision.TryGetComponent<Health>(out var heath))
+            {
                 heath.Damage(_damage);
+                heath.Push(gameObject);
+            }
 
             Destroy();
         }

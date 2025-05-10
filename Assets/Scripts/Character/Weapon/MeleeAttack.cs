@@ -20,6 +20,7 @@ public class MeleeAttack : MonoBehaviour
                 continue;
 
             heath.Damage(_damage);
+            heath.Push(gameObject);
         }
     }
 }

@@ -5,6 +5,7 @@ public class EnemyMeleeAttackPosition : MonoBehaviour
 {
     [SerializeField] private MeleeAttack _melee;
     [SerializeField] private CheckZone _checkZone;
+    [SerializeField] private EnemyMoveAnimationControl _animationControl;
     [SerializeField] private float _attackTimeDelay = 3f;
     [SerializeField] private float _attackActiveTime = 1f;
     [SerializeField] private float _damage = 3f;
@@ -45,6 +46,7 @@ public class EnemyMeleeAttackPosition : MonoBehaviour
         {
             _activeTimer = 0f;
             _melee.gameObject.SetActive(false);
+
         }
 
         _timer += Time.deltaTime;
@@ -75,6 +77,7 @@ public class EnemyMeleeAttackPosition : MonoBehaviour
 
             _checkZone.gameObject.SetActive(false);
             _melee.gameObject.SetActive(true);
+            _animationControl.SetAttackAnimation(direction);
             break;
         }
     }

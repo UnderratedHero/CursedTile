@@ -7,12 +7,15 @@ public class Health : MonoBehaviour
     [SerializeField] private ParticleSystem _particles;
     [SerializeField] private AudioSource _deathSource;
     [SerializeField] private AudioSource _damageSource;
+    [SerializeField] private DamagePush _push;
+    [SerializeField] private EntityType _entityType;
     public event Action OnEntityDead;
     private float _health;
     private float _currentMaxHealth;
 
     public float EntityHealth { get { return _health; } }
     public float EntityMaxHealth { get { return _healthMax; } }
+    public EntityType EntityType { get { return _entityType; } }
 
     private void Awake()
     {
@@ -29,6 +32,11 @@ public class Health : MonoBehaviour
             _deathSource.Play();
             Death();
         }
+    }
+
+    public void Push(GameObject collision)
+    {
+        _push.Push(collision);
     }
 
     public void Heal(float heal)

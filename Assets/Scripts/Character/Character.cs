@@ -37,13 +37,13 @@ public class Character : MonoBehaviour, IControllable
     public List<(int x, int y)> ExaminedTiles {  get { return _examinedTiles; } }
     public (int x, int y) CurrentFloorTileId { get { return _currentFloorTileId; } }
     public int ArrowsAmount { get { return _arrowsAmount; } }   
+    public WeaponConfig CurrentWeaponConfig { get { return _currentWeaponConfig; } }
 
 
     private void Start()
     {
         _currentWeaponConfig = _weaponConfigs.First();
         _weapon.gameObject.SetActive(true);
-       // _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
         _attackArea.SetDamage(_currentWeaponConfig.Damage);
         _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
     }

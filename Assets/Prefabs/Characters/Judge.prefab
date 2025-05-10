@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 305694594620236624}
   - component: {fileID: 305694594620236625}
   - component: {fileID: 7372832319198459984}
+  - component: {fileID: 4042978918940977905}
   - component: {fileID: 2809882541128798742}
   m_Layer: 0
   m_Name: Judge
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -507905977, guid: bdeb8e075285e9842ac25ccfb5923b22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,7 +130,7 @@ MonoBehaviour:
   _checkZone: {fileID: 305694595324283617}
   _attackTimeDelay: 5
   _attackActiveTime: 1
-  _damage: 5
+  _damage: 10
   _attackLayerName:
   - Character
 --- !u!114 &7372832319198459984
@@ -146,6 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 2809882541128798742}
   _movementThreshold: 0.01
+--- !u!114 &4042978918940977905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305694594620236630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cb1f2a49507ce4a995339c594e3042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: 305694594620236624}
 --- !u!95 &2809882541128798742
 Animator:
   serializedVersion: 5
@@ -192,9 +206,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305694594834882960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.121, y: 0, z: 0}
+  m_LocalScale: {x: 0.39, y: 0.39, z: 0.39}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 305694595329406446}
   m_RootOrder: 0
@@ -299,7 +313,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 0.86
 --- !u!114 &305694595324283617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305694595329406445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.72, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -375,7 +389,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3198647
 --- !u!1 &3876744125381250244
 GameObject:
   m_ObjectHideFlags: 0

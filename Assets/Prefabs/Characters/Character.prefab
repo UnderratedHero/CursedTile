@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 7546784272181976586}
   - component: {fileID: 8914092280753000635}
   - component: {fileID: 71430459107525564}
+  - component: {fileID: 8126496980093046643}
   - component: {fileID: 6025725395549733434}
   - component: {fileID: 2601731897978857522}
   - component: {fileID: 7657037632868495786}
@@ -524,6 +525,8 @@ MonoBehaviour:
   _particles: {fileID: 7657037632868495786}
   _deathSource: {fileID: 1633879182695021554}
   _damageSource: {fileID: 18798238660502546}
+  _push: {fileID: 8126496980093046643}
+  _entityType: 0
 --- !u!114 &71430459107525564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +540,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 192841330930394269}
+--- !u!114 &8126496980093046643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546784272181976590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ab0912cf6542d4fa65d2538af59b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pushPower: 2
 --- !u!58 &6025725395549733434
 CircleCollider2D:
   m_ObjectHideFlags: 0
