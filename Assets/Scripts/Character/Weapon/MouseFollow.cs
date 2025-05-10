@@ -3,6 +3,10 @@ using UnityEngine;
 public class MouseFollow : MonoBehaviour
 {
     private Camera _mainCam;
+    private Vector3 _direction;
+
+    public Vector3 Direction {  get { return _direction; } }
+
 
     private void Start()
     {
@@ -23,15 +27,15 @@ public class MouseFollow : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        Vector3 mousePos = Input.mousePosition;
+        var mousePos = Input.mousePosition;
         mousePos.z = Mathf.Abs(_mainCam.transform.position.z - transform.position.z);
         mousePos = _mainCam.ScreenToWorldPoint(mousePos);
 
-        Vector3 direction = mousePos - transform.position;
+        _direction = mousePos - transform.position;
 
-        if (direction.sqrMagnitude > 0.001f)
+        if (_direction.sqrMagnitude > 0.001f)
         {
-            float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float rotZ = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, rotZ);
         }
     }

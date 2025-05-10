@@ -507,6 +507,7 @@ MonoBehaviour:
   _health: {fileID: 8914092280753000635}
   _light: {fileID: 5655597533214326054}
   _playerAnimationControl: {fileID: 71430459107525564}
+  _followMouse: {fileID: 7221232966916598723}
 --- !u!114 &8914092280753000635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,7 +5555,7 @@ Animator:
   m_GameObject: {fileID: 7546784272181976590}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 984e35087d1f66844944513616bd63a1, type: 2}
+  m_Controller: {fileID: 9100000, guid: a620bb25a0cf97540825e25a04c32493, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5606,7 +5607,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1488972642, guid: b7ce71709dd33124cb63569515f45df1, type: 3}
+  m_Sprite: {fileID: 2142792657, guid: 9235139075cea3f428ed164ba46eb056, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

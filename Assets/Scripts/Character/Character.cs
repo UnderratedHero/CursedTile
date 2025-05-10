@@ -19,6 +19,7 @@ public class Character : MonoBehaviour, IControllable
     [SerializeField] private Health _health;
     [SerializeField] private Light2D _light;
     [SerializeField] private PlayerAnimationControl _playerAnimationControl;
+    [SerializeField] private MouseFollow _followMouse;
 
     private List<(int x, int y)> _examinedTiles = new List<(int x, int y)>();
     private (int x, int y) _currentFloorTileId;
@@ -42,7 +43,7 @@ public class Character : MonoBehaviour, IControllable
     {
         _currentWeaponConfig = _weaponConfigs.First();
         _weapon.gameObject.SetActive(true);
-        _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
+       // _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
         _attackArea.SetDamage(_currentWeaponConfig.Damage);
         _rangeAttack.SetDamage(_currentWeaponConfig.Damage);
     }
@@ -70,7 +71,7 @@ public class Character : MonoBehaviour, IControllable
     public void SwitchWeapon()
     {   
         _currentWeaponConfig = _weaponConfigs.FirstOrDefault(v => v.Id != _currentWeaponConfig.Id);
-        _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
+       // _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
 
         switch (_currentWeaponConfig.WeaponType)
         {
@@ -92,12 +93,13 @@ public class Character : MonoBehaviour, IControllable
         switch (_currentWeaponConfig.WeaponType)
         {
             case WeaponType.Melee:
+                _playerAnimationControl.SetAttackAnimation(_followMouse.Direction, _currentWeaponConfig.WeaponType);
                 _attackArea.gameObject.SetActive(true);
                 break;
             case WeaponType.Range:
                 if (_arrowsAmount <= 0)
                     return;
-
+                _playerAnimationControl.SetAttackAnimation(_followMouse.Direction, _currentWeaponConfig.WeaponType);
                 _rangeAttack.gameObject.SetActive(true);
                 _rangeAttack.Shoot(_currentWeaponConfig.AttackSpeed);
                 _arrowsAmount--;
@@ -110,7 +112,7 @@ public class Character : MonoBehaviour, IControllable
     public void Move(Vector2 vector)
     {
         _character.transform.position += new Vector3(vector.x, vector.y) * _moveSpeed * Time.deltaTime;
-        _playerAnimationControl.SetAnimation(vector);
+        _playerAnimationControl.SetWalkAnimation(vector);
     }
 
     public void SetBuff(BuffConfig config)
