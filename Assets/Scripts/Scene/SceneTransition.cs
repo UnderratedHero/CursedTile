@@ -10,16 +10,21 @@ public class SceneTransition : MonoBehaviour
 
     private static SceneTransition instance;
     private static bool shouldPlayOpeningAnimation = false;
+    private static bool isSceneLoading = false;
 
     private Animator componentAnimator;
     private AsyncOperation loadingSceneOperation;
 
     public static void SwitchToScene(string sceneName)
     {
+        if (isSceneLoading || instance == null || instance.componentAnimator == null)
+            return;
+
+        isSceneLoading = true;
+
         instance.componentAnimator.SetTrigger("sceneClosing");
 
         instance.loadingSceneOperation = SceneManager.LoadSceneAsync(sceneName);
-
         instance.loadingSceneOperation.allowSceneActivation = false;
 
         instance.LoadingProgressBar.fillAmount = 0;
@@ -34,9 +39,10 @@ public class SceneTransition : MonoBehaviour
         if (shouldPlayOpeningAnimation)
         {
             componentAnimator.SetTrigger("sceneOpening");
-            instance.LoadingProgressBar.fillAmount = 1;
+            LoadingProgressBar.fillAmount = 1;
 
             shouldPlayOpeningAnimation = false;
+            isSceneLoading = false;
         }
     }
 
@@ -47,14 +53,15 @@ public class SceneTransition : MonoBehaviour
 
         LoadingPercentage.text = Mathf.RoundToInt(loadingSceneOperation.progress * 100) + "%";
 
-        LoadingProgressBar.fillAmount = Mathf.Lerp(LoadingProgressBar.fillAmount, loadingSceneOperation.progress,
+        LoadingProgressBar.fillAmount = Mathf.Lerp(
+            LoadingProgressBar.fillAmount,
+            loadingSceneOperation.progress,
             Time.deltaTime * 5);
     }
 
     public void OnAnimationOver()
     {
         shouldPlayOpeningAnimation = true;
-
         loadingSceneOperation.allowSceneActivation = true;
     }
 }

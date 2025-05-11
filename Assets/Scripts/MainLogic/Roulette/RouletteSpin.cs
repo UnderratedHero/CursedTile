@@ -24,7 +24,9 @@ public class RouletteSpin : MonoBehaviour
     {
         if (_isRotating && !_isStopping)
         {
-            var torque = _isRotateClockwise ? -_rotationSpeed : _rotationSpeed;
+            float randomOffset = Random.Range(-5f, 5f);
+            float baseTorque = _isRotateClockwise ? -_rotationSpeed : _rotationSpeed;
+            float torque = baseTorque + randomOffset;
             _rigidBody.AddTorque(torque);
         }
         else if (_isStopping)

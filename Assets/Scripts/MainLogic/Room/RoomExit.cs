@@ -35,7 +35,8 @@ public class RoomExit : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer(_layerName) || other == null)
             return;
 
-        other.GetComponent<Character>().ClearExaminedTiles();
+        var character = other.GetComponent<Character>();
+        character.ClearExaminedTiles();
 
         if (_isFinalStep)
         {
@@ -54,5 +55,10 @@ public class RoomExit : MonoBehaviour
         }
 
         other.transform.position = enterTransform.position;
+        character.SetCurrentRoomId(_nextRoom.Id);
+        if (!transform.root.TryGetComponent<RoomPlacer>(out var placer))
+            return;
+
+        placer.ResetJudge();
     }
 }

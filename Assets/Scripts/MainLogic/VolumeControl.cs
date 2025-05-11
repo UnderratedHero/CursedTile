@@ -3,48 +3,76 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
+    public static VolumeControl Instance { get; private set; }
+
     [SerializeField] private Scrollbar _volumeSlider;
     [SerializeField] private Scrollbar _musicSlider;
+    [SerializeField] private AudioSource _audioSource;
 
-    [SerializeField] private AudioSource _musicAudioSource;
-    [SerializeField] private AudioSource _volumeAudioSource;
+    private float _volume = 1f;
+    private float _musicVolume = 1f;
+    private int _musicSamplePosition = 0;
 
-    private void Start()
+    private void Awake()
     {
-        if (_volumeSlider == null || _musicAudioSource == null)
+        if (Instance != null && Instance != this)
         {
-            Debug.LogError("VolumeControl: Slider или AudioSource не назначены.");
+            Destroy(gameObject);
             return;
         }
 
-        _volumeSlider.value = _volumeAudioSource.volume;
-        _musicSlider.value = _musicAudioSource.volume;
-
-        _volumeSlider.onValueChanged.AddListener(ChangeVolume);
-        _musicSlider.onValueChanged.AddListener(ChangeMusic);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void ChangeVolume(float value)
+    private void Start()
     {
-        _volumeAudioSource.volume = value;
-        
+        ApplyVolumesToSliders();
+
+        if (_volumeSlider != null)
+            _volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+
+        if (_musicSlider != null)
+            _musicSlider.onValueChanged.AddListener(OnMusicChanged);
     }
 
-    private void ChangeMusic(float value)
+    private void Update()
     {
-        _musicAudioSource.volume = value;
+        if (_audioSource != null && _audioSource.isPlaying)
+        {
+            _musicSamplePosition = _audioSource.timeSamples;
+        }
     }
+
+    private void OnVolumeChanged(float value)
+    {
+        _volume = value;
+    }
+
+    private void OnMusicChanged(float value)
+    {
+        _musicVolume = value;
+    }
+
+    private void ApplyVolumesToSliders()
+    {
+        if (_volumeSlider != null)
+            _volumeSlider.value = _volume;
+
+        if (_musicSlider != null)
+            _musicSlider.value = _musicVolume;
+    }
+
+    public float GetVolume() => _volume;
+    public float GetMusicVolume() => _musicVolume;
+    public int GetSavedSamplePosition() => _musicSamplePosition;
 
     private void OnDestroy()
     {
         if (_volumeSlider != null)
-        {
-            _volumeSlider.onValueChanged.RemoveListener(ChangeVolume);
-        }
+            _volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
 
         if (_musicSlider != null)
-        {
-            _musicSlider.onValueChanged.RemoveListener(ChangeMusic);
-        }
+            _musicSlider.onValueChanged.RemoveListener(OnMusicChanged);
     }
 }

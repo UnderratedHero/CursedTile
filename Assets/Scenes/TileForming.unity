@@ -314,8 +314,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278253311
-  m_fontColor: {r: 1, g: 0.964316, b: 0, a: 1}
+    rgba: 4278199950
+  m_fontColor: {r: 0.5568628, g: 0.14901961, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -476,6 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 356283083}
   - component: {fileID: 356283084}
+  - component: {fileID: 356283085}
   m_Layer: 0
   m_Name: FormingUi
   m_TagString: Untagged
@@ -516,6 +517,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: 009e0bea809fd0042aa2c2810db2ac02, type: 3}
   hotSpot: {x: 0, y: 0}
+--- !u!114 &356283085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356283082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4274bd1de3119ac4694eaf352fd311ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundAudioSource: {fileID: 1528322201}
+  _musicAudioSource: {fileID: 1528322199}
+  _isNeedToContinueTrack: 1
 --- !u!1 &384345486
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,8 +812,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278253055
-  m_fontColor: {r: 1, g: 0.95895493, b: 0, a: 1}
+    rgba: 4278201239
+  m_fontColor: {r: 0.5924529, g: 0.16795291, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -899,8 +915,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: 428}
-  m_SizeDelta: {x: 891.436, y: 385.864}
+  m_AnchoredPosition: {x: 0.000022888, y: 417}
+  m_SizeDelta: {x: 727.494, y: 247.424}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626742339
 MonoBehaviour:
@@ -931,8 +947,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278249458
-  m_fontColor: {r: 0.94716984, g: 0.904969, b: 0, a: 1}
+    rgba: 4278200206
+  m_fontColor: {r: 0.5568628, g: 0.15294118, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -949,8 +965,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.6
-  m_fontSizeBase: 90.6
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1132,14 +1148,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.23773581, g: 0.23773581, b: 0.23773581, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55f8b4ac55b963b4fadf7b7ee8a42231, type: 3}
+  m_Sprite: {fileID: -635095534, guid: e9e57aa977d5a0845b7e60ebca56e92f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1224,8 +1240,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278253055
-  m_fontColor: {r: 1, g: 0.95895493, b: 0, a: 1}
+    rgba: 4278201239
+  m_fontColor: {r: 0.5924529, g: 0.16795291, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1479,8 +1495,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278253055
-  m_fontColor: {r: 1, g: 0.95895493, b: 0, a: 1}
+    rgba: 4278201239
+  m_fontColor: {r: 0.5924529, g: 0.16795291, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1635,14 +1651,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.23773581, g: 0.23773581, b: 0.23773581, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55f8b4ac55b963b4fadf7b7ee8a42231, type: 3}
+  m_Sprite: {fileID: -635095534, guid: e9e57aa977d5a0845b7e60ebca56e92f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1790,14 +1806,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55f8b4ac55b963b4fadf7b7ee8a42231, type: 3}
+  m_Sprite: {fileID: -635095534, guid: e9e57aa977d5a0845b7e60ebca56e92f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1944,6 +1960,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d3509035e365074e9278099532692f5, type: 3}
+--- !u!82 &1528322199 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1901272474, guid: 7d3509035e365074e9278099532692f5, type: 3}
+  m_PrefabInstance: {fileID: 1528322198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1528322201 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1792461449, guid: 7d3509035e365074e9278099532692f5, type: 3}
@@ -2000,14 +2021,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.227451, g: 0.20784315, b: 0.25882354, a: 1}
+  m_Color: {r: 0.12452829, g: 0.12452829, b: 0.12452829, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ebf1844d57cc9214e8242042ad6af1fe, type: 3}
+  m_Sprite: {fileID: -635095534, guid: e9e57aa977d5a0845b7e60ebca56e92f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2294,7 +2315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5729062031006992380, guid: 66f7ed78c9b955e4388a10ebca3cb4d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: 5729062031006992380, guid: 66f7ed78c9b955e4388a10ebca3cb4d0, type: 3}
       propertyPath: m_LocalPosition.z

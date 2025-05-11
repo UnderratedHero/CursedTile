@@ -4,8 +4,10 @@ public class Room : MonoBehaviour
 {
     [SerializeField] private MazeGenerator _mazeGenerator;
 
+
     private int _id;
     private TileInfoRandom _data;
+    private GameObject _judge;
 
     public int Id { get { return _id; } }
     public TileInfoRandom Data { get { return _data; } }
@@ -25,5 +27,16 @@ public class Room : MonoBehaviour
     public void GenerateMaze()
     {
         _mazeGenerator.GenerateMaze(this);
+    }
+
+    public void ResetJudge()
+    {
+        if (_judge != null)
+            Destroy(_judge);
+    }
+
+    public void SetJudge(GameObject judge)
+    {
+        _judge = judge; 
     }
 }

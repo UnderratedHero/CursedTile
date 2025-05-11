@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7477352190265335770}
   - component: {fileID: 2243879241354447789}
-  - component: {fileID: -8724953131982303340}
   - component: {fileID: 850278861085199439}
   - component: {fileID: 3821040171380435698}
   - component: {fileID: 590318717353311830}
@@ -61,21 +60,8 @@ MonoBehaviour:
   _particles: {fileID: 590318717353311830}
   _deathSource: {fileID: 4515144455113375867}
   _damageSource: {fileID: 8181995941457611863}
-  _push: {fileID: -8724953131982303340}
+  _push: {fileID: 0}
   _entityType: 2
---- !u!114 &-8724953131982303340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3520388397974470750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ab0912cf6542d4fa65d2538af59b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pushPower: 2
 --- !u!70 &850278861085199439
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5088,7 +5074,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3520388397974470750}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

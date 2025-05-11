@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 305694594620236630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 305694595324283619}
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _melee: {fileID: 305694595329406444}
   _checkZone: {fileID: 305694595324283617}
+  _animationControl: {fileID: 7372832319198459984}
   _attackTimeDelay: 5
   _attackActiveTime: 1
   _damage: 10
@@ -313,7 +314,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.86
+  m_Radius: 0.4
 --- !u!114 &305694595324283617
 MonoBehaviour:
   m_ObjectHideFlags: 0

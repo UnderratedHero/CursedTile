@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         _countdownDuration = _startMinutes * 60f;
-        _endTime = Time.time + _countdownDuration;
+        RestartTimer();
     }
 
     private void Update()
@@ -47,5 +47,12 @@ public class Timer : MonoBehaviour
 
         float pulse = 1f + Mathf.Sin(Time.time * _pulseFrequency) * _pulseAmplitude;
         _text.transform.localScale = new Vector3(pulse, pulse, 1f);
+    }
+
+    public void RestartTimer()
+    {
+        _finished = false;
+        _runText.gameObject.SetActive(false);
+        _endTime = Time.time + _countdownDuration;
     }
 }

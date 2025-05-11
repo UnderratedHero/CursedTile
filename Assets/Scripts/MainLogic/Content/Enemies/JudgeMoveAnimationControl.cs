@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class JudgeMoveAnimationControl : MonoBehaviour
+public class JudgeMoveAnimationControl : AnimationControllerBase
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _movementThreshold = 0.01f;
 
     private Vector3 _previousPosition;
-    private static readonly int MoveUp = Animator.StringToHash("JudgeWalkUp");
-    private static readonly int MoveDown = Animator.StringToHash("JudgeWalkDown");
-    private static readonly int MoveLeft = Animator.StringToHash("JudgeWalkLeft");
-    private static readonly int MoveRight = Animator.StringToHash("JudgeWalkRight");
+    private static readonly int WalkUp = Animator.StringToHash("JudgeWalkUp");
+    private static readonly int WalkDown = Animator.StringToHash("JudgeWalkDown");
+    private static readonly int WalkLeft = Animator.StringToHash("JudgeWalkLeft");
+    private static readonly int WalkRight = Animator.StringToHash("JudgeWalkRight");
     private static readonly int Idle = Animator.StringToHash("JudgeIdle");
+    private static readonly int MeleeUp = Animator.StringToHash("JudgeMeleeUp");
+    private static readonly int MeleeDown = Animator.StringToHash("JudgeMeleeDown");
+    private static readonly int MeleeLeft = Animator.StringToHash("JudgeMeleeLeft");
+    private static readonly int MeleeRight = Animator.StringToHash("JudgeMeleeRight");
 
     private int _currentTrigger = Idle;
 
@@ -19,36 +23,89 @@ public class JudgeMoveAnimationControl : MonoBehaviour
         _previousPosition = transform.position;
     }
 
-    private void Update()
+    public override void SetAttackAnimation(Vector2 direction)
     {
-        Vector3 delta = transform.position - _previousPosition;
-
-        if (delta.magnitude > _movementThreshold)
+        if (direction.magnitude > 0.01f)
         {
-            if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
-                UpdateTrigger(delta.x > 0 ? MoveRight : MoveLeft);
+                if (direction.x > 0)
+                {
+                    SetAnimationTrigger(MeleeRight);
+                }
+                else
+                {
+                    SetAnimationTrigger(MeleeLeft);
+                }
             }
             else
             {
-                UpdateTrigger(delta.y > 0 ? MoveUp : MoveDown);
+                if (direction.y > 0)
+                {
+                    SetAnimationTrigger(MeleeUp);
+                }
+                else
+                {
+                    SetAnimationTrigger(MeleeDown);
+                }
             }
         }
         else
         {
-            UpdateTrigger(Idle);
+            SetAnimationTrigger(Idle);
         }
+    }
+
+    private void SetWalkAnimation(Vector2 direction)
+    {
+        if (direction.magnitude > 0.01f)
+        {
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                if (direction.x > 0)
+                {
+                    SetAnimationTrigger(WalkRight);
+                }
+                else
+                {
+                    SetAnimationTrigger(WalkLeft);
+                }
+            }
+            else
+            {
+                if (direction.y > 0)
+                {
+                    SetAnimationTrigger(WalkUp);
+                }
+                else
+                {
+                    SetAnimationTrigger(WalkDown);
+                }
+            }
+        }
+        else
+        {
+            SetAnimationTrigger(Idle);
+        }
+    }
+
+    private void Update()
+    {
+        Vector3 delta = transform.position - _previousPosition;
+
+        SetWalkAnimation(delta);
 
         _previousPosition = transform.position;
     }
 
-    private void UpdateTrigger(int newTrigger)
+    private void SetAnimationTrigger(int triggerHash)
     {
-        if (_currentTrigger == newTrigger)
-            return;
+        _animator.ResetTrigger(WalkUp);
+        _animator.ResetTrigger(WalkDown);
+        _animator.ResetTrigger(WalkLeft);
+        _animator.ResetTrigger(WalkRight);
+        _animator.ResetTrigger(Idle);
 
-        _animator.ResetTrigger(_currentTrigger);
-        _animator.SetTrigger(newTrigger);
-        _currentTrigger = newTrigger;
+        _animator.SetTrigger(triggerHash);
     }
 }

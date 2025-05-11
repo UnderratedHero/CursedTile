@@ -36,6 +36,9 @@ public class Health : MonoBehaviour
 
     public void Push(GameObject collision)
     {
+        if (_push == null)
+            return;
+
         _push.Push(collision);
     }
 
@@ -48,6 +51,7 @@ public class Health : MonoBehaviour
 
     public void Death()
     {
+        Statistics.AddKill();
         OnEntityDead?.Invoke();
         Destroy(gameObject);
     }

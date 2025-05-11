@@ -7,16 +7,20 @@ using UnityEngine;
 public class RoomPlacer : MonoBehaviour
 {
     [SerializeField] private GameObject _roomPrefab;
-    [SerializeField] private GameObject _character;
+    [SerializeField] private GameObject _characterPrefab;
     [SerializeField] private GameObject _judge;
     [SerializeField] private NavMeshSurface _surface;
     [SerializeField] private Vector3 _leftEnd;
     [SerializeField] private Vector3 _rightEnd;
     [SerializeField] private float _minutesToWait = 1;
+    [SerializeField] private Timer _timer;
+
 
     private List<TileInfoRandom> _tilesInfo;
     private List<Vector3> _roomPositions;
     private List<Room> _rooms;
+    private Character _character;
+    private List<Coroutine> _coroutines;
 
     public List<Room> Rooms { get { return _rooms; } }
 
@@ -26,7 +30,7 @@ public class RoomPlacer : MonoBehaviour
         SpawnRooms();
         SpawnCharacter();
 
-        StartCoroutine(WaitAndExecute());
+       
     }
 
     private void Start()
@@ -98,7 +102,6 @@ public class RoomPlacer : MonoBehaviour
         var roomObject = transform.Find(room.gameObject.name)?.gameObject;
         if (roomObject == null)
         {
-            Debug.LogError($"Объект комнаты {room.gameObject.name} не найден в иерархии RoomPlacer.");
             return;
         }
 
@@ -114,8 +117,13 @@ public class RoomPlacer : MonoBehaviour
 
         var spawnPosition = enterTransform.position;
 
-        var player = Instantiate(_character, spawnPosition, Quaternion.identity, transform);
+        var player = Instantiate(_characterPrefab, spawnPosition, Quaternion.identity, transform);
         player.SetActive(true);
+        if (!player.TryGetComponent(out _character))
+            return;
+
+        _character.SetCurrentRoomId(room.Id);
+        StartCoroutine(WaitAndExecute());
     }
 
     private IEnumerator WaitAndExecute()
@@ -128,22 +136,14 @@ public class RoomPlacer : MonoBehaviour
 
     private void SpawnJudge()
     {
-        var room = _rooms.FirstOrDefault(v => v.Id == 0);
+        var room = _rooms.FirstOrDefault(v => v.Id == _character.CurrentRoomId);
         if (room == null)
         {
-            Debug.LogError("Комната с Id == 0 не найдена.");
-            return;
-        }
-
-        var roomObject = transform.Find(room.gameObject.name)?.gameObject;
-        if (roomObject == null)
-        {
-            Debug.LogError($"Объект комнаты {room.gameObject.name} не найден в иерархии RoomPlacer.");
             return;
         }
 
         Transform enterTransform = null;
-        foreach (var child in roomObject.transform.GetComponentsInChildren<Transform>(true))
+        foreach (var child in room.gameObject.transform.GetComponentsInChildren<Transform>(true))
         {
             if (!child.name.Contains("Enter"))
                 continue;
@@ -156,5 +156,21 @@ public class RoomPlacer : MonoBehaviour
 
         var judge = Instantiate(_judge, spawnPosition, Quaternion.identity, transform);
         judge.SetActive(true);
+        room.SetJudge(judge);
+    }
+
+    public void ResetJudge()
+    {
+        var room = _rooms.FirstOrDefault(v => v.Id == _character.CurrentRoomId - 1);
+        if (room == null)
+        {
+            return;
+        }
+
+        StopAllCoroutines();
+
+        room.ResetJudge();
+        _timer.RestartTimer();
+        StartCoroutine(WaitAndExecute());
     }
 }

@@ -23,14 +23,14 @@ public class MazeGenerator : MonoBehaviour
     private int[,] _mazeGrid;
     private bool[,] _visited;
     private Vector2[] _directions = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
-    private List<(int Column, int Row)> _occupaedTiles;
+    private List<(int Column, int Row)> _occupiedTiles;
 
     private List<Vector2Int> _floorTiles = new List<Vector2Int>();
 
     public void GenerateMaze(Room room)
     {
         _room = room;
-        _occupaedTiles = new List<(int Column, int Row)>();
+        _occupiedTiles = new List<(int Column, int Row)>();
         var exit = _exitPrefab.GetComponent<RoomExit>();
         exit.SetRoom(room);
 
@@ -130,7 +130,7 @@ public class MazeGenerator : MonoBehaviour
             roomPosition.z
         );
         Instantiate(_enterPrefab, playerSpawnPosition, Quaternion.identity, transform);
-        _occupaedTiles.Add((startTile.x, startTile.y));
+        _occupiedTiles.Add((startTile.x, startTile.y));
 
         var exitPosition = new Vector3(
             roomPosition.x + farthestTile.x * _tileSize - _tileSize / 2f,
@@ -138,7 +138,7 @@ public class MazeGenerator : MonoBehaviour
             roomPosition.z
         );
         Instantiate(_exitPrefab, exitPosition, Quaternion.identity, transform);
-        _occupaedTiles.Add((farthestTile.x, farthestTile.y));
+        _occupiedTiles.Add((farthestTile.x, farthestTile.y));
     }
 
     private Vector2Int FindFarthestTile(int startX, int startY)
@@ -205,7 +205,7 @@ public class MazeGenerator : MonoBehaviour
             );
 
             Instantiate(_torchPrefab, torchPosition, Quaternion.identity, transform);
-            _occupaedTiles.Add((tile.x, tile.y));
+            _occupiedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -220,6 +220,7 @@ public class MazeGenerator : MonoBehaviour
 
             var randomValue = Random.Range(0, 100);
             float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
+            spawnChance += 0.02f;
             if (randomValue > spawnChance * 100)
                 continue;
 
@@ -230,7 +231,7 @@ public class MazeGenerator : MonoBehaviour
             );
 
             Instantiate(_enemyPrefab, enemyPosition, Quaternion.identity, transform);
-            _occupaedTiles.Add((tile.x, tile.y));
+            _occupiedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -246,6 +247,7 @@ public class MazeGenerator : MonoBehaviour
             var randomValue = Random.Range(0, 100);
 
             float spawnChance = 1 / (((int)_room.Data.DifficultyLevel) * _trashHold);
+            spawnChance += 0.03f;
             if (randomValue > spawnChance * 100)
                 continue;
 
@@ -256,7 +258,7 @@ public class MazeGenerator : MonoBehaviour
             );
 
             Instantiate(_casinoPrefab, healPosition, Quaternion.identity, transform);
-            _occupaedTiles.Add((tile.x, tile.y));
+            _occupiedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -272,6 +274,7 @@ public class MazeGenerator : MonoBehaviour
             var randomValue = Random.Range(0, 100);
 
             float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
+            spawnChance += 0.02f;
             if (randomValue > spawnChance * 100)
                 continue;
 
@@ -282,7 +285,7 @@ public class MazeGenerator : MonoBehaviour
             );
 
             Instantiate(_trapPrefab, trapPosition, Quaternion.identity, transform);
-            _occupaedTiles.Add((tile.x, tile.y));
+            _occupiedTiles.Add((tile.x, tile.y));
         }
     }
 
@@ -298,7 +301,7 @@ public class MazeGenerator : MonoBehaviour
 
     private bool IsOccupied(int x, int y)
     {
-        if (_occupaedTiles.Any(v => v.Column == x && v.Row == y))
+        if (_occupiedTiles.Any(v => v.Column == x && v.Row == y))
             return true;
 
         return false;

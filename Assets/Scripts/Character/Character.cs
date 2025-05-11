@@ -28,6 +28,7 @@ public class Character : MonoBehaviour, IControllable
     private bool _isBuffed = false;
     private float _lastDashTime = 0f;
     private int _arrowsAmount = 10;
+    private int _currentRoomId;
 
     public Health Health { get { return _health; } }
 
@@ -38,6 +39,8 @@ public class Character : MonoBehaviour, IControllable
     public (int x, int y) CurrentFloorTileId { get { return _currentFloorTileId; } }
     public int ArrowsAmount { get { return _arrowsAmount; } }   
     public WeaponConfig CurrentWeaponConfig { get { return _currentWeaponConfig; } }
+    public int CurrentRoomId { get { return _currentRoomId; } }
+
 
 
     private void Start()
@@ -51,6 +54,11 @@ public class Character : MonoBehaviour, IControllable
     public void AddArrows(int arrows)
     {
         _arrowsAmount += arrows;
+    }
+
+    public void SetCurrentRoomId(int id)
+    {
+        _currentRoomId = id;
     }
 
     public void SetCurrentTile(int x, int y)
@@ -71,7 +79,6 @@ public class Character : MonoBehaviour, IControllable
     public void SwitchWeapon()
     {   
         _currentWeaponConfig = _weaponConfigs.FirstOrDefault(v => v.Id != _currentWeaponConfig.Id);
-       // _weapon.SetSprite(_currentWeaponConfig.WeaponSprite);
 
         switch (_currentWeaponConfig.WeaponType)
         {
