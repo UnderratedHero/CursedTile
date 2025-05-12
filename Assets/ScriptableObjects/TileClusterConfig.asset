@@ -16,8 +16,29 @@ MonoBehaviour:
   _difficultyLevel: 030000000600000009000000
   _sprites:
   - tileType: 3
-    sprite: {fileID: 21300000, guid: 23b0958cc5386ef40b0f428476bfa3b2, type: 3}
+    sprite: {fileID: 21300000, guid: 1a7ed01804401b641b6195c6e889c5d8, type: 3}
+    difficultyLevel: 3
   - tileType: 1
-    sprite: {fileID: 21300000, guid: e75979e331aec7845ad3706ed02ce451, type: 3}
+    sprite: {fileID: 21300000, guid: c44b34cab48f0554f9b14bde2e4af798, type: 3}
+    difficultyLevel: 3
   - tileType: 2
-    sprite: {fileID: 21300000, guid: 8d90c686e91c2644d96aa6d1d59b1643, type: 3}
+    sprite: {fileID: 21300000, guid: 669e457cb6cb8d84ca1ccb7627546cfe, type: 3}
+    difficultyLevel: 3
+  - tileType: 3
+    sprite: {fileID: 21300000, guid: 5abdcf98acb54b34dbaa6bbe3943a70f, type: 3}
+    difficultyLevel: 6
+  - tileType: 3
+    sprite: {fileID: 21300000, guid: fde410e3aadf25e43b66409d3a439550, type: 3}
+    difficultyLevel: 9
+  - tileType: 1
+    sprite: {fileID: 21300000, guid: 9363c6acab855e14584517f4a25101fe, type: 3}
+    difficultyLevel: 6
+  - tileType: 1
+    sprite: {fileID: 21300000, guid: 2fab6834e27f52a4192687fb97e39a28, type: 3}
+    difficultyLevel: 9
+  - tileType: 2
+    sprite: {fileID: 21300000, guid: cb7a2deec8046004680e94345b265dc0, type: 3}
+    difficultyLevel: 6
+  - tileType: 2
+    sprite: {fileID: 21300000, guid: 94a45a71e6e44ce47bebbc4ca3a261bb, type: 3}
+    difficultyLevel: 9

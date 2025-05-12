@@ -20,4 +20,5 @@ public class TileSpritePair
 {
     public TileType tileType;
     public Sprite sprite;
+    public DifficultyLevel difficultyLevel;
 }

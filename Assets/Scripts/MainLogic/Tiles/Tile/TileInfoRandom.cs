@@ -23,7 +23,7 @@ public class TileInfoRandom
     {
         GetRandomTileType(config);
         GetRandomDifficultyLevel(config);
-        _sprite = config.Sprites.FirstOrDefault(v => v.tileType == _type).sprite;
+        _sprite = config.Sprites.FirstOrDefault(v => v.tileType == _type && v.difficultyLevel == _difficulty).sprite;
     }
 
     private void GetRandomTileType(TileClusterConfig config)
