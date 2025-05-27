@@ -12,7 +12,11 @@ public class TileInfoRandom
     public DifficultyLevel DifficultyLevel { get { return _difficulty; } }
 
 
-    public TileInfoRandom() { }
+    public TileInfoRandom() 
+    {
+        _type = TileType.Enemy;
+        _difficulty = DifficultyLevel.Low;
+    }
 
     public TileInfoRandom(TileClusterConfig config)
     {

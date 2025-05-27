@@ -5,6 +5,7 @@ public class HealthUI : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
     [SerializeField] private GameObject _deathUi;
+    [SerializeField] private Statistics _stats;
 
     private Health _health;
 
@@ -28,6 +29,7 @@ public class HealthUI : MonoBehaviour
 
     private void SetDeathUIActive()
     {
+        _stats.SetInfo();
         _deathUi.SetActive(true);
     }
 }

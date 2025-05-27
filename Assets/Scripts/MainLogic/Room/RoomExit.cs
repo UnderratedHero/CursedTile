@@ -60,5 +60,6 @@ public class RoomExit : MonoBehaviour
             return;
 
         placer.ResetJudge();
+        Statistics.AddRoom();
     }
 }

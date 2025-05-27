@@ -20,8 +20,10 @@ public class Room : MonoBehaviour
     public void SetInformation(int id, TileInfoRandom info = null)
     {
         _id = id;
-        if (info != null) 
+        if (info != null)
             _data = info;
+        else
+            _data = new TileInfoRandom();
     }
 
     public void GenerateMaze()

@@ -69,4 +69,4 @@ MonoBehaviour:
   _mazeWidth: 21
   _mazeHeight: 21
   _tileSize: 3
-  _trashHold: 70
+  _trashHold: 60

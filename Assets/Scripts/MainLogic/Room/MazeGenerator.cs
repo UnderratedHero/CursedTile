@@ -193,9 +193,7 @@ public class MazeGenerator : MonoBehaviour
                 continue;
 
             float spawnChance = 1 / ((int)_room.Data.DifficultyLevel * _trashHold);
-            var randomValue = Random.Range(0, 100);
-
-            if (randomValue > spawnChance * 1000)
+            if (Random.value > spawnChance)
                 continue;
 
             var torchPosition = new Vector3(
@@ -218,10 +216,9 @@ public class MazeGenerator : MonoBehaviour
             if (IsOccupied(tile.x, tile.y))
                 continue;
 
-            var randomValue = Random.Range(0, 100);
             float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
-            spawnChance += 0.02f;
-            if (randomValue > spawnChance * 100)
+            spawnChance += 0.05f;
+            if (Random.value > spawnChance)
                 continue;
 
             var enemyPosition = new Vector3(
@@ -244,11 +241,10 @@ public class MazeGenerator : MonoBehaviour
             if (IsOccupied(tile.x, tile.y))
                 continue;
 
-            var randomValue = Random.Range(0, 100);
 
             float spawnChance = 1 / (((int)_room.Data.DifficultyLevel) * _trashHold);
             spawnChance += 0.03f;
-            if (randomValue > spawnChance * 100)
+            if (Random.value > spawnChance)
                 continue;
 
             var healPosition = new Vector3(
@@ -271,11 +267,9 @@ public class MazeGenerator : MonoBehaviour
             if (IsOccupied(tile.x, tile.y))
                 continue;
 
-            var randomValue = Random.Range(0, 100);
-
             float spawnChance = ((int)_room.Data.DifficultyLevel) / _trashHold;
-            spawnChance += 0.02f;
-            if (randomValue > spawnChance * 100)
+            spawnChance += 0.05f;
+            if (Random.value > spawnChance)
                 continue;
 
             var trapPosition = new Vector3(
@@ -311,7 +305,7 @@ public class MazeGenerator : MonoBehaviour
     {
         for (var i = array.Length - 1; i > 0; i--)
         {
-            var j = UnityEngine.Random.Range(0, i + 1);
+            var j = Random.Range(0, i + 1);
             var temp = array[i];
             array[i] = array[j];
             array[j] = temp;

@@ -55,7 +55,7 @@ public class RoomPlacer : MonoBehaviour
         var direction = (_rightEnd - _leftEnd).normalized;
 
         float totalDistance = Vector3.Distance(_leftEnd, _rightEnd);
-        float distancePerStep = totalDistance / (_tilesInfo.Count - 1);
+        float distancePerStep = totalDistance / _tilesInfo.Count;
         for (int i = 0; i < 6; i++)
         {
             var newPosition = _leftEnd + direction * distancePerStep * i;
